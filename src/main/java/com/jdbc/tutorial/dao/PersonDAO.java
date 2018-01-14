@@ -17,8 +17,10 @@ import com.jdbc.tutorial.model.Person;
 
 public interface PersonDAO {
 
-	public void save(Person p);
-	
-	public List<Person> list();
+	public void addPerson(Person p);
+	public void updatePerson(Person p);
+	public Person getPersonById(int id);
+	public void removePerson(int id);
+	public List<Person> listPerson();
 	
 }
