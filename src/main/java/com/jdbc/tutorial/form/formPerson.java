@@ -19,17 +19,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class formPerson extends javax.swing.JFrame {
 
-    private List<Person> lModel;
-    private int NSR = 0 ; //NumberSelectedRow
+    private final List<Person> lModel;
+    private int NSR = 0; //NumberSelectedRow
+    private PersonDAO personDAO;
+    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 
     /**
      * Creates new form formPerson
      */
     public formPerson() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        PersonDAO personDAO = context.getBean(PersonDAO.class);
+        personDAO = context.getBean(PersonDAO.class);
         lModel = personDAO.listPerson();
         initComponents();
+        context.close();
     }
 
     /**
@@ -65,13 +67,19 @@ public class formPerson extends javax.swing.JFrame {
 
         jLabel2.setText("Страна");
 
-        jTextField1.setEnabled(false);
-
-        jTextField2.setEnabled(false);
-
         jButton1.setText("Добавить");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Редактировать");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Удалить");
 
@@ -134,6 +142,24 @@ public class formPerson extends javax.swing.JFrame {
         //positionText.setText(model.getValueAt(NSR, 2).toString());
         //telText.setText(model.getValueAt(NSR, 3).toString());
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //personDAO = context.getBean(PersonDAO.class);
+        personDAO.addPerson(new Person(jTextField1.getText(), jTextField2.getText()));
+        context.close();
+        initComponents();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Person p = new Person();
+        p.setName(jTextField1.getText());
+        p.setCountry(jTextField2.getText());
+        personDAO.updatePerson(p);
+        context.close();
+        initComponents();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

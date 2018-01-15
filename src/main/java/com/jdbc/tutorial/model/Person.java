@@ -45,6 +45,14 @@ public class Person {
 		this.id = id;
 	}
 
+    public Person() {
+    }
+
+    public Person(String name, String country) {
+        this.name = name;
+        this.country = country;
+    }
+
 	public String getName() {
 		return name;
 	}
