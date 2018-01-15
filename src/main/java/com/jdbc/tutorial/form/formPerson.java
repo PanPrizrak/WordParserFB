@@ -8,7 +8,9 @@ package com.jdbc.tutorial.form;
 import com.jdbc.tutorial.dao.PersonDAO;
 import com.jdbc.tutorial.model.Person;
 import com.jdbc.tutorial.model.PersonTableModel;
+import java.util.Arrays;
 import java.util.List;
+import javax.swing.table.TableModel;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -17,7 +19,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class formPerson extends javax.swing.JFrame {
 
-    private List<Person> lModel; 
+    private List<Person> lModel;
+    private int NSR = 0 ; //NumberSelectedRow
+
     /**
      * Creates new form formPerson
      */
@@ -50,6 +54,11 @@ public class formPerson extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel( new PersonTableModel(lModel));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setText("Имя");
@@ -113,6 +122,18 @@ public class formPerson extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        NSR = jTable1.getSelectedRow();
+        TableModel model = jTable1.getModel();
+        //String[] test = model.getValueAt(NSR, 1).toString().trim().split("\\s+");
+        //System.out.println("!!!!!!!!!!!!"+Arrays.toString(test));
+        jTextField1.setText(model.getValueAt(NSR, 1).toString());
+        jTextField2.setText(model.getValueAt(NSR, 2).toString());
+        //positionText.setText(model.getValueAt(NSR, 2).toString());
+        //telText.setText(model.getValueAt(NSR, 3).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
