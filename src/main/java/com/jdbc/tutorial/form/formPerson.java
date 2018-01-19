@@ -31,7 +31,7 @@ public class formPerson extends javax.swing.JFrame {
         personDAO = context.getBean(PersonDAO.class);
         lModel = personDAO.listPerson();
         initComponents();
-        context.close();
+      //  context.close();
     }
 
     /**
@@ -141,23 +141,25 @@ public class formPerson extends javax.swing.JFrame {
         jTextField2.setText(model.getValueAt(NSR, 2).toString());
         //positionText.setText(model.getValueAt(NSR, 2).toString());
         //telText.setText(model.getValueAt(NSR, 3).toString());
+        NSR = (int) model.getValueAt(NSR, 0);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //personDAO = context.getBean(PersonDAO.class);
         personDAO.addPerson(new Person(jTextField1.getText(), jTextField2.getText()));
-        context.close();
+      //  context.close();
         initComponents();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Person p = new Person();
+        p.setId(NSR);
         p.setName(jTextField1.getText());
         p.setCountry(jTextField2.getText());
         personDAO.updatePerson(p);
-        context.close();
+       // context.close();
         initComponents();
     }//GEN-LAST:event_jButton2ActionPerformed
 

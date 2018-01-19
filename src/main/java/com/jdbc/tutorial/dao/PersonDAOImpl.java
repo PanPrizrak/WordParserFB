@@ -54,7 +54,9 @@ public class PersonDAOImpl implements PersonDAO {
     @Override
     public void updatePerson(Person p) {
         Session session = this.sessionFactory.getCurrentSession();
+        session.getTransaction().begin();
         session.update(p);
+        session.getTransaction().commit();
         logger.info("!!!Person updated successfully, Person Details=" + p);
     }
 
