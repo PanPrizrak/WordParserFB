@@ -71,10 +71,12 @@ public class PersonDAOImpl implements PersonDAO {
     @Override
     public void removePerson(int id) {
         Session session = this.sessionFactory.getCurrentSession();
+        session.getTransaction().begin();
         Person p = (Person) session.load(Person.class, new Integer(id));
         if (null != p) {
             session.delete(p);
         }
+        session.getTransaction().commit();
         logger.info("Person deleted successfully, person details=" + p);
     }
 

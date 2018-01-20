@@ -19,7 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class formPerson extends javax.swing.JFrame {
 
-    private final List<Person> lModel;
+    private final List<Person> lModel=null;
     private int NSR = 0; //NumberSelectedRow
     private PersonDAO personDAO;
     private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
@@ -29,7 +29,7 @@ public class formPerson extends javax.swing.JFrame {
      */
     public formPerson() {
         personDAO = context.getBean(PersonDAO.class);
-        lModel = personDAO.listPerson();
+        //lModel = personDAO.listPerson();
         initComponents();
       //  context.close();
     }
@@ -55,7 +55,7 @@ public class formPerson extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel( new PersonTableModel(lModel));
+        jTable1.setModel( new PersonTableModel(personDAO.listPerson()));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -82,6 +82,11 @@ public class formPerson extends javax.swing.JFrame {
         });
 
         jButton3.setText("Удалить");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,7 +154,7 @@ public class formPerson extends javax.swing.JFrame {
         //personDAO = context.getBean(PersonDAO.class);
         personDAO.addPerson(new Person(jTextField1.getText(), jTextField2.getText()));
       //  context.close();
-        initComponents();
+        jTable1.setModel(new PersonTableModel(personDAO.listPerson()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -160,8 +165,14 @@ public class formPerson extends javax.swing.JFrame {
         p.setCountry(jTextField2.getText());
         personDAO.updatePerson(p);
        // context.close();
-        initComponents();
+        jTable1.setModel(new PersonTableModel(personDAO.listPerson()));
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        personDAO.removePerson(NSR);
+        jTable1.setModel(new PersonTableModel(personDAO.listPerson()));
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
