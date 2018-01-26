@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jdbc.tutorial.dao;
+package com.jdbc.tutorial.daoimpl;
 
+import com.jdbc.tutorial.dao.PersonDAO;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.jdbc.tutorial.model.Person;
+import com.jdbc.tutorial.entity.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

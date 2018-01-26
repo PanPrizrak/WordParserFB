@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 
-import com.jdbc.tutorial.model.Person;
+import com.jdbc.tutorial.entity.Person;
 
 public interface PersonDAO {
 

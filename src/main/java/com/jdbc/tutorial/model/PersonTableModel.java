@@ -5,6 +5,7 @@
  */
 package com.jdbc.tutorial.model;
 
+import com.jdbc.tutorial.entity.Person;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;

@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.jdbc.tutorial.dao.PersonDAO;
 import com.jdbc.tutorial.form.formPerson;
-import com.jdbc.tutorial.model.Person;
+import com.jdbc.tutorial.entity.Person;
 
 /**
  *

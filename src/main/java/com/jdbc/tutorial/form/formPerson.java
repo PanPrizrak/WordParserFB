@@ -6,7 +6,7 @@
 package com.jdbc.tutorial.form;
 
 import com.jdbc.tutorial.dao.PersonDAO;
-import com.jdbc.tutorial.model.Person;
+import com.jdbc.tutorial.entity.Person;
 import com.jdbc.tutorial.model.PersonTableModel;
 import java.util.Arrays;
 import java.util.List;
