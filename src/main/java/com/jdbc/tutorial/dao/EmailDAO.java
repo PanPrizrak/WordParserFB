@@ -5,10 +5,17 @@
  */
 package com.jdbc.tutorial.dao;
 
+import java.util.List;
+import com.jdbc.tutorial.entity.Email;
+
 /**
  *
  * @author asiro
  */
 public interface EmailDAO {
-    
+    public void addEmail(Email e);
+    public void updateEmail(Email e);
+    public Email getEmailById(int id);
+    public void removeEmail(int id);
+    public List<Email> listEmail();    
 }

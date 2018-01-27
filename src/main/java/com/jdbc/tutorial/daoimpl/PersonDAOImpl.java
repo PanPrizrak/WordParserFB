@@ -15,7 +15,7 @@ import org.hibernate.Transaction;
 import com.jdbc.tutorial.entity.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+ 
 /**
  *
  * @author asiro
@@ -39,7 +39,7 @@ public class PersonDAOImpl implements PersonDAO {
         session.close();
         logger.info("!!!Person saved successfully, Person Details=" + p);
     }
-
+ 
     @SuppressWarnings("unchecked")
     @Override
     public List<Person> listPerson() {

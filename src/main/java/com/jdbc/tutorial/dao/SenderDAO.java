@@ -5,10 +5,19 @@
  */
 package com.jdbc.tutorial.dao;
 
+import java.util.List;
+import com.jdbc.tutorial.entity.Sender;
+
 /**
  *
  * @author asiro
  */
 public interface SenderDAO {
+    
+    public void addSender(Sender s);
+    public void updateSender(Sender s);
+    public Sender getSenderById(int id);
+    public void removeSender(int id);
+    public List<Sender> listSender();
     
 }

@@ -5,10 +5,19 @@
  */
 package com.jdbc.tutorial.dao;
 
+import java.util.List;
+import com.jdbc.tutorial.entity.Tel;
+
 /**
  *
  * @author asiro
  */
 public interface TelDAO {
+    
+    public void addTell(Tel t);
+    public void updateTel(Tel t);
+    public Tel getTelById(int id);
+    public void removeTel(int id);
+    public List<Tel> listTel();
     
 }
