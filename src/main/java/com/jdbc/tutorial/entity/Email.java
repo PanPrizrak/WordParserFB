@@ -7,8 +7,13 @@ package com.jdbc.tutorial.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+
+
 
 /**
  *
@@ -19,6 +24,7 @@ import javax.persistence.Table;
 public class Email {
     
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="e_id")
     private int id;
     

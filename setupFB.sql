@@ -19,7 +19,7 @@ USE letterhead DARABASE changed;*/
 /*CREATE TABLE sender (
 s_id int(10) AUTO_INCREMENT,
 s_ved varchar(50),
-s_name_s varchar(50) NOT NULL,
+s_name varchar(50) NOT NULL,
 s_adres varchar(50) NOT NULL,
 s_rs varchar(50) NOT NULL,
 s_bank varchar(50) NOT NULL,

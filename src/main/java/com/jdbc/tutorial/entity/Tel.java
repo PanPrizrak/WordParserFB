@@ -5,10 +5,81 @@
  */
 package com.jdbc.tutorial.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author asiro
  */
+
+@Entity
+@Table (name = "tel")
 public class Tel {
+    
+    @Id
+    @Column (name = "t_id")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @Column (name = "t_tel")
+    private String tel;
+    
+    @Column(name="t_sender_id")
+    private int sender_id;
+    
+    @Column(name="t_recipient_id")
+    private int recipient_id;
+
+    public Tel() {
+    }
+
+    public Tel(int id, String tel, int sender_id, int recipient_id) {
+        this.id = id;
+        this.tel = tel;
+        this.sender_id = sender_id;
+        this.recipient_id = recipient_id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public int getSender_id() {
+        return sender_id;
+    }
+
+    public void setSender_id(int sender_id) {
+        this.sender_id = sender_id;
+    }
+
+    public int getRecipient_id() {
+        return recipient_id;
+    }
+
+    public void setRecipient_id(int recipient_id) {
+        this.recipient_id = recipient_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tel{" + "id=" + id + ", tel=" + tel + ", sender_id=" + sender_id + ", recipient_id=" + recipient_id + '}';
+    }
     
 }
