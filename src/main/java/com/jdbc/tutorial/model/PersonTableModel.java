@@ -40,23 +40,21 @@ public class PersonTableModel extends AbstractTableModel {
         } catch (Exception e) {
             System.out.println("Exception in WorkerTableModel");
         }*/
-
     }
 
     public Object getValueAt(int rowindex, int columnindex) {
-        
+
         Person o = ResultSets.get(rowindex);
-            if(columnindex==0){
-                return o.getId();
-            } else if(columnindex ==1){
-                return o.getName();
-            } else if(columnindex ==2){
-                return o.getCountry();
-            } 
-            else{
-                return null;
-            }
-      /*  String[] row = ResultSets.get(rowindex);
+        if (columnindex == 0) {
+            return o.getId();
+        } else if (columnindex == 1) {
+            return o.getName();
+        } else if (columnindex == 2) {
+            return o.getCountry();
+        } else {
+            return null;
+        }
+        /*  String[] row = ResultSets.get(rowindex);
         return row[columnindex];*/
 
     }
