@@ -59,5 +59,4 @@ public class WorkerTableModel extends AbstractTableModel {
                 return null;
         }
     }
-    
 }
