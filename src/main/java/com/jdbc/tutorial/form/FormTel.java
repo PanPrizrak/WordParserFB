@@ -26,21 +26,100 @@ public class FormTel extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        tablePanel = new javax.swing.JPanel();
+        TelTable = new javax.swing.JTable();
+        dataPanel = new javax.swing.JPanel();
+        telLabel = new javax.swing.JLabel();
+        telText = new javax.swing.JTextField();
+        senderLabel = new javax.swing.JLabel();
+        senderText = new javax.swing.JTextField();
+        recipientLabel = new javax.swing.JLabel();
+        recipientText = new javax.swing.JTextField();
+        senderPanel = new javax.swing.JPanel();
+        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(600, 600));
+        setName("FormTel"); // NOI18N
+        setSize(new java.awt.Dimension(600, 600));
+
+        tablePanel.setBackground(new java.awt.Color(255, 255, 255));
+        tablePanel.setMinimumSize(new java.awt.Dimension(300, 64));
+        tablePanel.setPreferredSize(new java.awt.Dimension(300, 64));
+        tablePanel.setLayout(new java.awt.GridLayout());
+
+        TelTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablePanel.add(TelTable);
+
+        dataPanel.setBackground(new java.awt.Color(255, 255, 255));
+        dataPanel.setLayout(new java.awt.GridLayout(3, 2));
+
+        telLabel.setText("Tel");
+        dataPanel.add(telLabel);
+        dataPanel.add(telText);
+
+        senderLabel.setText("Sender");
+        dataPanel.add(senderLabel);
+        dataPanel.add(senderText);
+
+        recipientLabel.setText("Recipient");
+        dataPanel.add(recipientLabel);
+        dataPanel.add(recipientText);
+
+        senderPanel.setBackground(new java.awt.Color(255, 255, 255));
+        senderPanel.setLayout(new java.awt.GridLayout(3, 1));
+
+        addButton.setText("Add");
+        senderPanel.add(addButton);
+
+        editButton.setText("Edit");
+        senderPanel.add(editButton);
+
+        removeButton.setText("Remove");
+        senderPanel.add(removeButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(senderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -79,5 +158,18 @@ public class FormTel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TelTable;
+    private javax.swing.JButton addButton;
+    private javax.swing.JPanel dataPanel;
+    private javax.swing.JButton editButton;
+    private javax.swing.JLabel recipientLabel;
+    private javax.swing.JTextField recipientText;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JLabel senderLabel;
+    private javax.swing.JPanel senderPanel;
+    private javax.swing.JTextField senderText;
+    private javax.swing.JPanel tablePanel;
+    private javax.swing.JLabel telLabel;
+    private javax.swing.JTextField telText;
     // End of variables declaration//GEN-END:variables
 }

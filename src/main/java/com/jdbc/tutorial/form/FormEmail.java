@@ -44,8 +44,7 @@ public class FormEmail extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
         setMinimumSize(new java.awt.Dimension(600, 600));
-        setName("FromEmail"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(600, 600));
+        setName("FormEmail"); // NOI18N
         setSize(new java.awt.Dimension(600, 600));
 
         tablePanel.setBackground(new java.awt.Color(255, 255, 255));
