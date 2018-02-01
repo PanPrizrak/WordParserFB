@@ -27,18 +27,94 @@ public class FormSender extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        senderTable = new javax.swing.JTable();
+        dataPanel = new javax.swing.JPanel();
+        vedLabel = new javax.swing.JLabel();
+        vedText = new javax.swing.JTextField();
+        nameLabel = new javax.swing.JLabel();
+        nameText = new javax.swing.JTextField();
+        adresLabel = new javax.swing.JLabel();
+        adresText = new javax.swing.JTextField();
+        rsLabel = new javax.swing.JLabel();
+        rsText = new javax.swing.JTextField();
+        bankLabel = new javax.swing.JLabel();
+        bankText = new javax.swing.JTextField();
+        kodbankLabel = new javax.swing.JLabel();
+        kodbankText = new javax.swing.JTextField();
+        unpLabel = new javax.swing.JLabel();
+        unpText = new javax.swing.JTextField();
+        senderPanel = new javax.swing.JPanel();
+        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        senderTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(senderTable);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 560, 170));
+
+        dataPanel.setBackground(new java.awt.Color(255, 255, 255));
+        dataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        dataPanel.setLayout(new java.awt.GridLayout(7, 2));
+
+        vedLabel.setText("Vedomstvo");
+        dataPanel.add(vedLabel);
+        dataPanel.add(vedText);
+
+        nameLabel.setText("Name");
+        dataPanel.add(nameLabel);
+        dataPanel.add(nameText);
+
+        adresLabel.setText("Adres");
+        dataPanel.add(adresLabel);
+        dataPanel.add(adresText);
+
+        rsLabel.setText("RS");
+        dataPanel.add(rsLabel);
+        dataPanel.add(rsText);
+
+        bankLabel.setText("Bank");
+        dataPanel.add(bankLabel);
+        dataPanel.add(bankText);
+
+        kodbankLabel.setText("KodBank");
+        dataPanel.add(kodbankLabel);
+        dataPanel.add(kodbankText);
+
+        unpLabel.setText("UNP");
+        dataPanel.add(unpLabel);
+        dataPanel.add(unpText);
+
+        getContentPane().add(dataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 280, 120));
+
+        senderPanel.setBackground(new java.awt.Color(255, 255, 255));
+        senderPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        senderPanel.setLayout(new java.awt.GridLayout(3, 1));
+
+        addButton.setText("Add");
+        senderPanel.add(addButton);
+
+        editButton.setText("Edit");
+        senderPanel.add(editButton);
+
+        removeButton.setText("Remove");
+        senderPanel.add(removeButton);
+
+        getContentPane().add(senderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 220, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,5 +155,26 @@ public class FormSender extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JLabel adresLabel;
+    private javax.swing.JTextField adresText;
+    private javax.swing.JLabel bankLabel;
+    private javax.swing.JTextField bankText;
+    private javax.swing.JPanel dataPanel;
+    private javax.swing.JButton editButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel kodbankLabel;
+    private javax.swing.JTextField kodbankText;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField nameText;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JLabel rsLabel;
+    private javax.swing.JTextField rsText;
+    private javax.swing.JPanel senderPanel;
+    private javax.swing.JTable senderTable;
+    private javax.swing.JLabel unpLabel;
+    private javax.swing.JTextField unpText;
+    private javax.swing.JLabel vedLabel;
+    private javax.swing.JTextField vedText;
     // End of variables declaration//GEN-END:variables
 }

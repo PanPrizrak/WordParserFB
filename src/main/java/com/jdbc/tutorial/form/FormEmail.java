@@ -5,6 +5,16 @@
  */
 package com.jdbc.tutorial.form;
 
+import com.jdbc.tutorial.entity.Email;
+import com.jdbc.tutorial.dao.EmailDAO;
+import com.jdbc.tutorial.model.EmailTableModel;
+
+import java.util.List;
+
+import javax.swing.table.TableModel;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  *
  * @author asiro
@@ -14,8 +24,17 @@ public class FormEmail extends javax.swing.JFrame {
     /**
      * Creates new form FormEmail
      */
+    
+    private Email email = new Email();
+    private List<Email> emailList;
+    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private final EmailDAO emailDAO = context.getBean(EmailDAO.class);
+    private final EmailTableModel emailTableModel = new EmailTableModel(emailDAO.listEmail());
+    private int NSR = 0;
+        
     public FormEmail() {
         initComponents();
+        EmailTable.setModel(emailTableModel);
     }
 
     /**
@@ -61,6 +80,11 @@ public class FormEmail extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        EmailTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EmailTableMouseClicked(evt);
+            }
+        });
         tablePanel.add(EmailTable);
 
         dataPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -82,12 +106,27 @@ public class FormEmail extends javax.swing.JFrame {
         senderPanel.setLayout(new java.awt.GridLayout(3, 1));
 
         addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
         senderPanel.add(addButton);
 
         editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
         senderPanel.add(editButton);
 
         removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
         senderPanel.add(removeButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,6 +158,40 @@ public class FormEmail extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        email.setEmail(emailText.getText());
+        email.setSender_id(new Integer(senderText.getText()));
+        email.setRecipient_id(new Integer(recipientText.getText()));
+        emailDAO.addEmail(email);
+        EmailTable.setModel(emailTableModel);
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
+        email.setEmail(emailText.getText());
+        email.setSender_id(new Integer(senderText.getText()));
+        email.setRecipient_id(new Integer(recipientText.getText()));
+        emailDAO.updateEmail(email);
+        EmailTable.setModel(emailTableModel);
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        // TODO add your handling code here:
+        emailDAO.removeEmail(NSR);
+        EmailTable.setModel(emailTableModel);
+    }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void EmailTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EmailTableMouseClicked
+        // TODO add your handling code here:
+        NSR = EmailTable.getSelectedRow();
+        TableModel model = EmailTable.getModel();
+        emailText.setText(model.getValueAt(NSR, 1).toString());
+        senderText.setText(model.getValueAt(NSR, 2).toString());
+        recipientText.setText(model.getValueAt(NSR, 3).toString());
+        NSR = (int) model.getValueAt(NSR, 0);
+    }//GEN-LAST:event_EmailTableMouseClicked
 
     /**
      * @param args the command line arguments
