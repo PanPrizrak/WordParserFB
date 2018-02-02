@@ -5,6 +5,15 @@
  */
 package com.jdbc.tutorial.form;
 
+import com.jdbc.tutorial.entity.Tel;
+import com.jdbc.tutorial.dao.TelDAO;
+import com.jdbc.tutorial.model.TelTableModel;
+
+import java.util.List;
+
+import javax.swing.table.TableModel;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  *
  * @author asiro
@@ -14,8 +23,16 @@ public class FormTel extends javax.swing.JFrame {
     /**
      * Creates new form FormTel
      */
+    
+    private Tel tel = new Tel();
+    private List<Tel> telList;
+    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private final TelDAO telDAO = context.getBean(TelDAO.class);
+    private final TelTableModel telTableModel = new TelTableModel(telDAO.listTel());
+    
     public FormTel() {
         initComponents();
+        TelTable.setModel(telTableModel);
     }
 
     /**
