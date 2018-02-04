@@ -9,7 +9,6 @@ import com.jdbc.tutorial.entity.Tel;
 import com.jdbc.tutorial.dao.TelDAO;
 import com.jdbc.tutorial.model.TelTableModel;
 
-import java.util.List;
 
 import javax.swing.table.TableModel;
 
@@ -25,16 +24,33 @@ public class FormTel extends javax.swing.JFrame {
      */
     
     private Tel tel = new Tel();
-    private List<Tel> telList;
     private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
     private final TelDAO telDAO = context.getBean(TelDAO.class);
     private final TelTableModel telTableModel = new TelTableModel(telDAO.listTel());
+    private int NSR = 0;
+    
+    private void refresh(){
+        TelTable.setModel(telTableModel);
+    }
+    
+    private void addORupdate(String buf){
+        tel.setTel(telText.getText());
+        tel.setSender_id(new Integer(senderText.getText()));
+        tel.setRecipient_id(new Integer(recipientText.getText()));
+        switch(buf){
+            case "add":
+                telDAO.addTell(tel);
+            case "update":
+                telDAO.updateTel(tel);
+        }
+        this.refresh();
+    }
     
     public FormTel() {
         initComponents();
-        TelTable.setModel(telTableModel);
+        this.refresh();
     }
-
+           
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +59,6 @@ public class FormTel extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         tablePanel = new javax.swing.JPanel();
         TelTable = new javax.swing.JTable();
@@ -67,7 +82,7 @@ public class FormTel extends javax.swing.JFrame {
         tablePanel.setBackground(new java.awt.Color(255, 255, 255));
         tablePanel.setMinimumSize(new java.awt.Dimension(300, 64));
         tablePanel.setPreferredSize(new java.awt.Dimension(300, 64));
-        tablePanel.setLayout(new java.awt.GridLayout());
+        tablePanel.setLayout(new java.awt.GridLayout(1, 0));
 
         TelTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,6 +95,11 @@ public class FormTel extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TelTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TelTableMouseClicked(evt);
+            }
+        });
         tablePanel.add(TelTable);
 
         dataPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -101,12 +121,27 @@ public class FormTel extends javax.swing.JFrame {
         senderPanel.setLayout(new java.awt.GridLayout(3, 1));
 
         addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
         senderPanel.add(addButton);
 
         editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
         senderPanel.add(editButton);
 
         removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
         senderPanel.add(removeButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,6 +173,32 @@ public class FormTel extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TelTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TelTableMouseClicked
+        // TODO add your handling code here:
+        NSR = TelTable.getSelectedRow();
+        TableModel model = TelTable.getModel();
+        telText.setText(model.getValueAt(NSR, 1).toString());
+        senderText.setText(model.getValueAt(NSR, 2).toString());
+        recipientText.setText(model.getValueAt(NSR, 3).toString());
+        NSR = (int) model.getValueAt(NSR, 0);
+    }//GEN-LAST:event_TelTableMouseClicked
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        this.addORupdate("add");
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
+        this.addORupdate("update");
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        // TODO add your handling code here:
+        telDAO.removeTel(NSR);
+        this.refresh();
+    }//GEN-LAST:event_removeButtonActionPerformed
 
     /**
      * @param args the command line arguments

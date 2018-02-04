@@ -5,6 +5,13 @@
  */
 package com.jdbc.tutorial.form;
 
+import com.jdbc.tutorial.entity.Recipient;
+import com.jdbc.tutorial.dao.RecipientDAO;
+import com.jdbc.tutorial.model.RecipientTableModel;
+
+import javax.swing.table.TableModel;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  *
  * @author asiro
@@ -14,8 +21,31 @@ public class FormRecipient extends javax.swing.JFrame {
     /**
      * Creates new form FormRecipient
      */
+    
+    private Recipient recipient = new Recipient();
+    private final ClassPathXmlApplicationContext comtext = new ClassPathXmlApplicationContext("spring.xml");
+    private final RecipientDAO recipientDAO = comtext.getBean(RecipientDAO.class);
+    private RecipientTableModel recipientTableModel = new RecipientTableModel(recipientDAO.listRecipient());
+    private int NSR = 0;
+    
+    private void refresh(){
+        RecipientTable.setModel(recipientTableModel);
+    }
+    
+    private void addORupdate(String buf){
+        recipient.setName(nameText.getText());
+        switch (buf){
+            case "add":
+                recipientDAO.addRecipient(recipient);
+            case "update":
+                recipientDAO.updateRecipient(recipient);
+        }
+        this.refresh();
+    }
+    
     public FormRecipient() {
         initComponents();
+        this.refresh();
     }
 
     /**
@@ -28,7 +58,7 @@ public class FormRecipient extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        recipientTable = new javax.swing.JTable();
+        RecipientTable = new javax.swing.JTable();
         nameLabel = new javax.swing.JLabel();
         nameText = new javax.swing.JTextField();
         addButtom = new javax.swing.JButton();
@@ -38,7 +68,7 @@ public class FormRecipient extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        recipientTable.setModel(new javax.swing.table.DefaultTableModel(
+        RecipientTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -49,12 +79,17 @@ public class FormRecipient extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        RecipientTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RecipientTableMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        getContentPane().add(recipientTable, gridBagConstraints);
+        getContentPane().add(RecipientTable, gridBagConstraints);
 
         nameLabel.setText("Name");
         nameLabel.setToolTipText("");
@@ -72,18 +107,33 @@ public class FormRecipient extends javax.swing.JFrame {
         getContentPane().add(nameText, gridBagConstraints);
 
         addButtom.setText("Add");
+        addButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtomActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         getContentPane().add(addButtom, gridBagConstraints);
 
         editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         getContentPane().add(editButton, gridBagConstraints);
 
         removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -91,6 +141,30 @@ public class FormRecipient extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void RecipientTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecipientTableMouseClicked
+        // TODO add your handling code here:
+        NSR = RecipientTable.getSelectedRow();
+        TableModel model = RecipientTable.getModel();
+        nameText.setText(model.getValueAt(NSR, ICONIFIED).toString());
+        NSR = (int) model.getValueAt(NSR, 0);        
+    }//GEN-LAST:event_RecipientTableMouseClicked
+
+    private void addButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtomActionPerformed
+        // TODO add your handling code here:
+        this.addORupdate("add");
+    }//GEN-LAST:event_addButtomActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
+        this.addORupdate("update");
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        // TODO add your handling code here:
+        recipientDAO.removeRecipient(NSR);
+        this.refresh();
+    }//GEN-LAST:event_removeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,11 +202,11 @@ public class FormRecipient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable RecipientTable;
     private javax.swing.JButton addButtom;
     private javax.swing.JButton editButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameText;
-    private javax.swing.JTable recipientTable;
     private javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
 }

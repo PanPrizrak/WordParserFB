@@ -9,8 +9,6 @@ import com.jdbc.tutorial.entity.Email;
 import com.jdbc.tutorial.dao.EmailDAO;
 import com.jdbc.tutorial.model.EmailTableModel;
 
-import java.util.List;
-
 import javax.swing.table.TableModel;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -26,7 +24,6 @@ public class FormEmail extends javax.swing.JFrame {
      */
     
     private Email email = new Email();
-    private List<Email> emailList;
     private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
     private final EmailDAO emailDAO = context.getBean(EmailDAO.class);
     private final EmailTableModel emailTableModel = new EmailTableModel(emailDAO.listEmail());

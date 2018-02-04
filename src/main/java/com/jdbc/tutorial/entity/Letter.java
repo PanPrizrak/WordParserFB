@@ -5,6 +5,7 @@
  */
 package com.jdbc.tutorial.entity;
 
+import java.util.Date;
 import javafx.scene.chart.PieChart.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Letter {
     
     @Column (name = "l_data")
     @Temporal (value = TemporalType.DATE)
-    private Data data;
+    private Date data;
     
     @Column (name = "l_number")
     private int number;
@@ -55,7 +56,7 @@ public class Letter {
     public Letter() {
     }
 
-    public Letter(int id, int sender_id, int recipient_id, Data data, int number, String subject, String message, int worker_id, String executor) {
+    public Letter(int id, int sender_id, int recipient_id, Date data, int number, String subject, String message, int worker_id, String executor) {
         this.id = id;
         this.sender_id = sender_id;
         this.recipient_id = recipient_id;
@@ -91,11 +92,11 @@ public class Letter {
         this.recipient_id = recipient_id;
     }
 
-    public Data getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

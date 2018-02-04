@@ -5,6 +5,19 @@
  */
 package com.jdbc.tutorial.form;
 
+import com.jdbc.tutorial.entity.Letter;
+import com.jdbc.tutorial.dao.LetterDAO;
+import com.jdbc.tutorial.model.LetterTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.table.TableModel;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  *
  * @author asiro
@@ -14,8 +27,43 @@ public class FormLetter extends javax.swing.JFrame {
     /**
      * Creates new form FromLetter
      */
+
+    private Letter letter = new Letter();
+    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private final LetterDAO letterDAO = context.getBean(LetterDAO.class);
+    private final LetterTableModel letterTableModel = new LetterTableModel(letterDAO.listLetter());
+    private int NSR = 0;
+    
+    private void refresh(){
+        LetterTable.setModel(letterTableModel);
+    }
+    
+    private void addORupdate(String buf) throws ParseException{
+        letter.setSender_id(new Integer(senderText.getText()));;
+        letter.setRecipient_id(new Integer(recipientText.getText()));
+        
+        //String to Date
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
+        Date d = format.parse(dataText.getText());
+        letter.setData(d);
+        
+        letter.setNumber(new Integer(numberText.getText()));
+        letter.setSubject(subjectText.getText());
+        letter.setMessage(messageText.getText());
+        letter.setWorker_id(new Integer(workerText.getText()));
+        letter.setExecutor(executorText.getText());
+        switch (buf) {
+            case "add":
+                letterDAO.addLetter(letter);
+            case "update":
+                letterDAO.updateLetter(letter);
+        }
+        this.refresh();
+    }
+    
     public FormLetter() {
         initComponents();
+        this.refresh();
     }
 
     /**
@@ -65,6 +113,11 @@ public class FormLetter extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        LetterTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LetterTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(LetterTable);
 
         dataPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -106,6 +159,11 @@ public class FormLetter extends javax.swing.JFrame {
         SenderPanel.setLayout(new java.awt.GridLayout(3, 1));
 
         addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
         SenderPanel.add(addButton);
 
         editButton.setText("Edit");
@@ -117,6 +175,11 @@ public class FormLetter extends javax.swing.JFrame {
         SenderPanel.add(editButton);
 
         removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
         SenderPanel.add(removeButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,8 +212,43 @@ public class FormLetter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            this.addORupdate("update");
+        } catch (ParseException ex) {
+            Logger.getLogger(FormLetter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_editButtonActionPerformed
+
+    private void LetterTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LetterTableMouseClicked
+        // TODO add your handling code here:
+        NSR = LetterTable.getSelectedRow();
+        TableModel model = LetterTable.getModel();
+        senderText.setText(model.getValueAt(NSR, 1).toString());
+        recipientText.setText(model.getValueAt(NSR, 2).toString());
+        dataText.setText(model.getValueAt(NSR,3).toString());
+        numberText.setText(model.getValueAt(NSR, 4).toString());
+        subjectText.setText(model.getValueAt(NSR, 5).toString());
+        messageText.setText(model.getValueAt(NSR, 6).toString());
+        workerText.setText(model.getValueAt(NSR, 7).toString());
+        executorText.setText(model.getValueAt(NSR, 8).toString());
+        NSR = (int) model.getValueAt(NSR, 0);
+    }//GEN-LAST:event_LetterTableMouseClicked
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        try {
+            // TODO add your handling code here:
+            this.addORupdate("add");
+        } catch (ParseException ex) {
+            Logger.getLogger(FormLetter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        // TODO add your handling code here:
+        letterDAO.removeLetter(NSR);
+        this.refresh();
+    }//GEN-LAST:event_removeButtonActionPerformed
 
     /**
      * @param args the command line arguments
