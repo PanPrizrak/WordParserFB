@@ -5,6 +5,13 @@
  */
 package com.jdbc.tutorial.form;
 
+import com.jdbc.tutorial.entity.Sender;
+import com.jdbc.tutorial.dao.SenderDAO;
+import com.jdbc.tutorial.model.SenderTableModel;
+
+import javax.swing.table.TableModel;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  *
  * @author asiro
@@ -14,8 +21,41 @@ public class FormSender extends javax.swing.JFrame {
     /**
      * Creates new form FormSender
      */
+    private Sender sender = new Sender();
+    private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private SenderDAO senderDAO = context.getBean(SenderDAO.class);
+    private SenderTableModel senderTablemodel = new SenderTableModel(senderDAO.listSender());
+    private int NSR = 0;
+    
+    private void refresh(){
+        SenderTable.setModel(senderTablemodel);
+    }
+    
+    private void addORupadate(String buf){
+        sender.setVed(vedText.getText().toString());
+        sender.setName(nameText.getText().toString());
+        sender.setAdres(adresText.getText().toString());
+        sender.setRs(rsText.getText().toString());
+        sender.setBank(bankText.getText().toString());
+        sender.setKodbank(kodbankText.getText().toString());
+        sender.setUnp(new Integer(unpText.getText()));
+        switch (buf) {
+            case "add":
+                senderDAO.addSender(sender);
+            case "update":
+                senderDAO.updateSender(sender);
+        }
+        this.refresh();
+    }
+    
+    private String getValueTable(int nsr, int index){
+        TableModel model = SenderTable.getModel();
+        return model.getValueAt(nsr, index).toString();
+    }
+    
     public FormSender() {
         initComponents();
+        this.refresh();
     }
 
     /**
@@ -28,7 +68,7 @@ public class FormSender extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        senderTable = new javax.swing.JTable();
+        SenderTable = new javax.swing.JTable();
         dataPanel = new javax.swing.JPanel();
         vedLabel = new javax.swing.JLabel();
         vedText = new javax.swing.JTextField();
@@ -52,7 +92,7 @@ public class FormSender extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        senderTable.setModel(new javax.swing.table.DefaultTableModel(
+        SenderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,7 +103,12 @@ public class FormSender extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(senderTable);
+        SenderTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SenderTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(SenderTable);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 560, 170));
 
@@ -106,18 +151,62 @@ public class FormSender extends javax.swing.JFrame {
         senderPanel.setLayout(new java.awt.GridLayout(3, 1));
 
         addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
         senderPanel.add(addButton);
 
         editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
         senderPanel.add(editButton);
 
         removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
         senderPanel.add(removeButton);
 
         getContentPane().add(senderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 220, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SenderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SenderTableMouseClicked
+        // TODO add your handling code here:
+        NSR = SenderTable.getSelectedRow();
+        vedText.setText(this.getValueTable(NSR, 1));
+        nameText.setText(this.getValueTable(NSR, 2));
+        adresText.setText(this.getValueTable(NSR, 3));
+        rsText.setText(this.getValueTable(NSR, 4));
+        bankText.setText(this.getValueTable(NSR, 5));
+        kodbankText.setText(this.getValueTable(NSR, 6));
+        unpText.setText(this.getValueTable(NSR, 7));
+        NSR = new Integer(this.getValueTable(NSR, 0));
+    }//GEN-LAST:event_SenderTableMouseClicked
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        this.addORupadate("add");
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
+        this.addORupadate("update");
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        // TODO add your handling code here:
+        senderDAO.removeSender(NSR);
+        this.refresh();
+    }//GEN-LAST:event_removeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,6 +244,7 @@ public class FormSender extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable SenderTable;
     private javax.swing.JButton addButton;
     private javax.swing.JLabel adresLabel;
     private javax.swing.JTextField adresText;
@@ -171,7 +261,6 @@ public class FormSender extends javax.swing.JFrame {
     private javax.swing.JLabel rsLabel;
     private javax.swing.JTextField rsText;
     private javax.swing.JPanel senderPanel;
-    private javax.swing.JTable senderTable;
     private javax.swing.JLabel unpLabel;
     private javax.swing.JTextField unpText;
     private javax.swing.JLabel vedLabel;

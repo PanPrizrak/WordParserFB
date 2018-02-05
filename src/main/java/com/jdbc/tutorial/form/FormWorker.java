@@ -5,6 +5,13 @@
  */
 package com.jdbc.tutorial.form;
 
+import com.jdbc.tutorial.entity.Worker;
+import com.jdbc.tutorial.dao.WorkerDAO;
+import com.jdbc.tutorial.model.WorkerTableModel;
+
+import javax.swing.table.TableModel;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  *
  * @author asiro
@@ -14,6 +21,37 @@ public class FormWorker extends javax.swing.JFrame {
     /**
      * Creates new form FormWorker
      */
+    
+    private Worker worker = new Worker();
+    private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private WorkerDAO workerDAO = context.getBean(WorkerDAO.class);
+    private WorkerTableModel workerTableModel = new WorkerTableModel(workerDAO.listWorker());
+    private int NSR = 0;
+    
+    private void refresh(){
+        WorkerTable.setModel(workerTableModel);
+    }
+    
+    private void addORupdate(String buf){
+        worker.setPosition(positionText.getText());
+        worker.setName(nameText.getText());
+        worker.setSname(secondnameText.getText());
+        worker.setPatronymic(patronymicText.getText());
+        worker.setRecipient_id(new Integer(recipientText.getText()));
+        switch (buf){
+            case "add":
+                workerDAO.addWorker(worker);
+            case "update":
+                workerDAO.updateWorker(worker);
+        }
+        this.refresh();
+    }
+    
+    private String getValueTable(int nsr, int index){
+        TableModel model = WorkerTable.getModel();
+        return model.getValueAt(nsr, index).toString();
+    }
+    
     public FormWorker() {
         initComponents();
     }
@@ -28,26 +66,26 @@ public class FormWorker extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        workerTable = new javax.swing.JTable();
+        WorkerTable = new javax.swing.JTable();
         dataPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        positionLable = new javax.swing.JLabel();
+        positionText = new javax.swing.JTextField();
+        nameLabel = new javax.swing.JLabel();
+        nameText = new javax.swing.JTextField();
+        secondnameLabel = new javax.swing.JLabel();
+        secondnameText = new javax.swing.JTextField();
+        patronymicLabel = new javax.swing.JLabel();
+        patronymicText = new javax.swing.JTextField();
+        recipientLabel = new javax.swing.JLabel();
+        recipientText = new javax.swing.JTextField();
         senderPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        workerTable.setModel(new javax.swing.table.DefaultTableModel(
+        WorkerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -58,44 +96,64 @@ public class FormWorker extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(workerTable);
+        WorkerTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                WorkerTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(WorkerTable);
 
         dataPanel.setBackground(new java.awt.Color(255, 255, 255));
         dataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         dataPanel.setLayout(new java.awt.GridLayout(5, 2));
 
-        jLabel1.setText("Position");
-        dataPanel.add(jLabel1);
-        dataPanel.add(jTextField1);
+        positionLable.setText("Position");
+        dataPanel.add(positionLable);
+        dataPanel.add(positionText);
 
-        jLabel2.setText("Name");
-        dataPanel.add(jLabel2);
-        dataPanel.add(jTextField2);
+        nameLabel.setText("Name");
+        dataPanel.add(nameLabel);
+        dataPanel.add(nameText);
 
-        jLabel3.setText("SecondName");
-        dataPanel.add(jLabel3);
-        dataPanel.add(jTextField3);
+        secondnameLabel.setText("SecondName");
+        dataPanel.add(secondnameLabel);
+        dataPanel.add(secondnameText);
 
-        jLabel4.setText("Patronymic");
-        dataPanel.add(jLabel4);
-        dataPanel.add(jTextField4);
+        patronymicLabel.setText("Patronymic");
+        dataPanel.add(patronymicLabel);
+        dataPanel.add(patronymicText);
 
-        jLabel5.setText("Recipient");
-        dataPanel.add(jLabel5);
-        dataPanel.add(jTextField5);
+        recipientLabel.setText("Recipient");
+        dataPanel.add(recipientLabel);
+        dataPanel.add(recipientText);
 
         senderPanel.setBackground(new java.awt.Color(255, 255, 255));
         senderPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         senderPanel.setLayout(new java.awt.GridLayout(3, 1));
 
-        jButton1.setText("Add");
-        senderPanel.add(jButton1);
+        addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        senderPanel.add(addButton);
 
-        jButton2.setText("Edit");
-        senderPanel.add(jButton2);
+        editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+        senderPanel.add(editButton);
 
-        jButton3.setText("Remove");
-        senderPanel.add(jButton3);
+        removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
+        senderPanel.add(removeButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,6 +183,33 @@ public class FormWorker extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void WorkerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WorkerTableMouseClicked
+        // TODO add your handling code here:
+        NSR = WorkerTable.getSelectedRow();
+        positionText.setText(this.getValueTable(NSR,1));
+        nameText.setText(this.getValueTable(NSR, 2));
+        secondnameText.setText(this.getValueTable(NSR, 3));
+        patronymicText.setText(this.getValueTable(NSR, 4));
+        recipientText.setText(this.getValueTable(NSR, 5));
+        NSR = new Integer(this.getValueTable(NSR, 0));
+    }//GEN-LAST:event_WorkerTableMouseClicked
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        this.addORupdate("add");
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
+        this.addORupdate("update");
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        // TODO add your handling code here:
+        workerDAO.removeWorker(NSR);
+        this.refresh();
+    }//GEN-LAST:event_removeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,22 +247,22 @@ public class FormWorker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable WorkerTable;
+    private javax.swing.JButton addButton;
     private javax.swing.JPanel dataPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton editButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField nameText;
+    private javax.swing.JLabel patronymicLabel;
+    private javax.swing.JTextField patronymicText;
+    private javax.swing.JLabel positionLable;
+    private javax.swing.JTextField positionText;
+    private javax.swing.JLabel recipientLabel;
+    private javax.swing.JTextField recipientText;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JLabel secondnameLabel;
+    private javax.swing.JTextField secondnameText;
     private javax.swing.JPanel senderPanel;
-    private javax.swing.JTable workerTable;
     // End of variables declaration//GEN-END:variables
 }
