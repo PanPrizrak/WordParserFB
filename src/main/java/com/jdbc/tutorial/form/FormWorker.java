@@ -23,7 +23,7 @@ public class FormWorker extends javax.swing.JFrame {
      */
     
     private Worker worker = new Worker();
-    private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
     private WorkerDAO workerDAO = context.getBean(WorkerDAO.class);
     private WorkerTableModel workerTableModel = new WorkerTableModel(workerDAO.listWorker());
     private int NSR = 0;

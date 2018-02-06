@@ -9,7 +9,7 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
               destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/TestDB" />
+        <property name="url" value="jdbc:mysql://localhost:3306/letterhead" />
         <property name="username" value="root" />
         <property name="password" value="root" />
     </bean>
@@ -36,7 +36,29 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
             <list>
-                <value>com.jdbc.tutorial.entity.Person</value>
+                <value>com.jdbc.tutorial.entity.Email</value>
+                <value>com.jdbc.tutorial.entity.Letter</value>
+                <value>com.jdbc.tutorial.entity.Recipient</value>
+                <value>com.jdbc.tutorial.entity.Sender</value>
+                <value>com.jdbc.tutorial.entity.Tel</value>
+                <value>com.jdbc.tutorial.entity.Worker</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+                <prop key="hibernate.show_sql">false</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="hibernate3AnnotatedSessionFactory"
+              class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="annotatedClasses">
+            <list>
+                <value>com.jdbc.tutorial.entity.Letter</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -48,7 +70,24 @@
         </property>
     </bean>
 	
-    <bean id="personDAO" class="com.jdbc.tutorial.daoimpl.PersonDAOImpl">
+	
+    <bean id="EmailDAO" class="com.jdbc.tutorial.daoimpl.EmailDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
+   <bean id="LetterDAO" class="com.jdbc.tutorial.daoimpl.LetterDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+    <bean id="RecipientDAO" class="com.jdbc.tutorial.daoimpl.RecipientDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+    <bean id="SenderDAO" class="com.jdbc.tutorial.daoimpl.SenderDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+    <bean id="TelDAO" class="com.jdbc.tutorial.daoimpl.TelDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+    <bean id="WorkerDAO" class="com.jdbc.tutorial.daoimpl.WorkerDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+    
 </beans>

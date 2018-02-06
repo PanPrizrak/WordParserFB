@@ -52,6 +52,13 @@ public class formPerson extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        letterPanel = new javax.swing.JPanel();
+        emailButton = new javax.swing.JButton();
+        letterButton = new javax.swing.JButton();
+        recipientButton = new javax.swing.JButton();
+        senderButton = new javax.swing.JButton();
+        telButton = new javax.swing.JButton();
+        workerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,13 +95,63 @@ public class formPerson extends javax.swing.JFrame {
             }
         });
 
+        letterPanel.setLayout(new java.awt.GridLayout(3, 2));
+
+        emailButton.setText("Email");
+        emailButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailButtonActionPerformed(evt);
+            }
+        });
+        letterPanel.add(emailButton);
+
+        letterButton.setText("Letter");
+        letterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                letterButtonActionPerformed(evt);
+            }
+        });
+        letterPanel.add(letterButton);
+
+        recipientButton.setText("Recipient");
+        recipientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recipientButtonActionPerformed(evt);
+            }
+        });
+        letterPanel.add(recipientButton);
+
+        senderButton.setText("Sender");
+        senderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                senderButtonActionPerformed(evt);
+            }
+        });
+        letterPanel.add(senderButton);
+
+        telButton.setText("Telefon");
+        telButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telButtonActionPerformed(evt);
+            }
+        });
+        letterPanel.add(telButton);
+
+        workerButton.setText("Worker");
+        workerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workerButtonActionPerformed(evt);
+            }
+        });
+        letterPanel.add(workerButton);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -109,7 +166,10 @@ public class formPerson extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addComponent(letterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -130,7 +190,9 @@ public class formPerson extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addComponent(letterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -174,6 +236,43 @@ public class formPerson extends javax.swing.JFrame {
         jTable1.setModel(new PersonTableModel(personDAO.listPerson()));
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void emailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
+        // TODO add your handling code here:
+        FormEmail emailForm = new FormEmail();
+        emailForm.setVisible(true);
+        
+    }//GEN-LAST:event_emailButtonActionPerformed
+
+    private void letterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_letterButtonActionPerformed
+        // TODO add your handling code here:
+        FormLetter letterForm = new FormLetter();
+        letterForm.setVisible(true);
+    }//GEN-LAST:event_letterButtonActionPerformed
+
+    private void recipientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recipientButtonActionPerformed
+        // TODO add your handling code here:
+        FormRecipient recipientForm = new FormRecipient();
+        recipientForm.setVisible(true);
+    }//GEN-LAST:event_recipientButtonActionPerformed
+
+    private void senderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senderButtonActionPerformed
+        // TODO add your handling code here:
+        FormSender senderForm = new FormSender();
+        senderForm.setVisible(true);
+    }//GEN-LAST:event_senderButtonActionPerformed
+
+    private void telButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telButtonActionPerformed
+        // TODO add your handling code here:
+        FormTel telForm = new FormTel();
+        telForm.setVisible(true);
+    }//GEN-LAST:event_telButtonActionPerformed
+
+    private void workerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workerButtonActionPerformed
+        // TODO add your handling code here:
+        FormWorker workerForm = new FormWorker();
+        workerForm.setVisible(true);
+    }//GEN-LAST:event_workerButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -210,6 +309,7 @@ public class formPerson extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton emailButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -219,5 +319,11 @@ public class formPerson extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton letterButton;
+    private javax.swing.JPanel letterPanel;
+    private javax.swing.JButton recipientButton;
+    private javax.swing.JButton senderButton;
+    private javax.swing.JButton telButton;
+    private javax.swing.JButton workerButton;
     // End of variables declaration//GEN-END:variables
 }

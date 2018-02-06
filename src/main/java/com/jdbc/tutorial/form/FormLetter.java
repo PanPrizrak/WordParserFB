@@ -29,7 +29,7 @@ public class FormLetter extends javax.swing.JFrame {
      */
 
     private Letter letter = new Letter();
-    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
     private final LetterDAO letterDAO = context.getBean(LetterDAO.class);
     private final LetterTableModel letterTableModel = new LetterTableModel(letterDAO.listLetter());
     private int NSR = 0;

@@ -44,7 +44,7 @@ public class EmailDAOImpl implements EmailDAO{
     @Override
     public List<Email> listEmail() {
         Session session = this.sessionFactory.openSession();
-        List<Email> emailList = session.createQuery("from email").list();
+        List<Email> emailList = session.createQuery("from Email").list();
         for (Email e: emailList) {
             logger.info("!!!Email List::" + e + "!!!");
         }

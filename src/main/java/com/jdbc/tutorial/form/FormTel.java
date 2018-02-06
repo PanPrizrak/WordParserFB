@@ -24,7 +24,7 @@ public class FormTel extends javax.swing.JFrame {
      */
     
     private Tel tel = new Tel();
-    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
     private final TelDAO telDAO = context.getBean(TelDAO.class);
     private final TelTableModel telTableModel = new TelTableModel(telDAO.listTel());
     private int NSR = 0;

@@ -23,7 +23,7 @@ public class FormRecipient extends javax.swing.JFrame {
      */
     
     private Recipient recipient = new Recipient();
-    private final ClassPathXmlApplicationContext comtext = new ClassPathXmlApplicationContext("spring.xml");
+    private final ClassPathXmlApplicationContext comtext = new ClassPathXmlApplicationContext("springFB.xml");
     private final RecipientDAO recipientDAO = comtext.getBean(RecipientDAO.class);
     private RecipientTableModel recipientTableModel = new RecipientTableModel(recipientDAO.listRecipient());
     private int NSR = 0;

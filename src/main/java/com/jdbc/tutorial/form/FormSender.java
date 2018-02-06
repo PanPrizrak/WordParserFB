@@ -22,7 +22,7 @@ public class FormSender extends javax.swing.JFrame {
      * Creates new form FormSender
      */
     private Sender sender = new Sender();
-    private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
     private SenderDAO senderDAO = context.getBean(SenderDAO.class);
     private SenderTableModel senderTablemodel = new SenderTableModel(senderDAO.listSender());
     private int NSR = 0;

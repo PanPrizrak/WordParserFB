@@ -22,13 +22,12 @@ public class FormEmail extends javax.swing.JFrame {
     /**
      * Creates new form FormEmail
      */
-    
     private Email email = new Email();
-    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
     private final EmailDAO emailDAO = context.getBean(EmailDAO.class);
     private final EmailTableModel emailTableModel = new EmailTableModel(emailDAO.listEmail());
     private int NSR = 0;
-        
+
     public FormEmail() {
         initComponents();
         EmailTable.setModel(emailTableModel);
@@ -159,8 +158,16 @@ public class FormEmail extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
         email.setEmail(emailText.getText());
-        email.setSender_id(new Integer(senderText.getText()));
-        email.setRecipient_id(new Integer(recipientText.getText()));
+        if (senderText.getText().toString().length() == 0) {
+            email.setSender_id(0);
+        } else {
+            email.setSender_id(new Integer(senderText.getText()));
+        }
+        if (recipientText.getText().toString().length() == 0) {
+            email.setRecipient_id(0);
+        } else {
+            email.setRecipient_id(new Integer(recipientText.getText()));
+        }
         emailDAO.addEmail(email);
         EmailTable.setModel(emailTableModel);
     }//GEN-LAST:event_addButtonActionPerformed
