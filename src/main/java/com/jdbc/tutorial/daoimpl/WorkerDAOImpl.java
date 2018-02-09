@@ -26,7 +26,7 @@ public class WorkerDAOImpl implements WorkerDAO {
     
     private SessionFactory sessionFactory;
     
-    public void setSessionfactory(SessionFactory sessionFactory){
+    public void setSessionFactory(SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
     }
 
@@ -79,7 +79,7 @@ public class WorkerDAOImpl implements WorkerDAO {
     public List<Worker> listWorker() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Session session = this.sessionFactory.openSession();
-        List<Worker> workerList = session.createQuery("from worker").list();
+        List<Worker> workerList = session.createQuery("from Worker").list();
         for (Worker w : workerList){
             logger.info("!!!Worker List::" + w + "!!!");
         }

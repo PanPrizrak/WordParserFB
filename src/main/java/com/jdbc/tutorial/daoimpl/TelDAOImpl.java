@@ -77,7 +77,7 @@ public class TelDAOImpl implements TelDAO {
     public List<Tel> listTel() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Session session = this.sessionFactory.openSession();
-        List<Tel> telList = session.createQuery("from tel").list();
+        List<Tel> telList = session.createQuery("from Tel").list();
         for (Tel t : telList){
             logger.info("!!!Tel List::" + t);
         }

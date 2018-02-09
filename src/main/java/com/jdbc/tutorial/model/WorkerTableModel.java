@@ -22,6 +22,10 @@ public class WorkerTableModel extends AbstractTableModel {
     private String[] colNames = {"ID", "Position", "Name", "Sname", "Patronymic", "Recipient"};
     private List<Worker> ResultSets;
 
+    public WorkerTableModel() {
+    }
+    
+    
     public WorkerTableModel(List<Worker> ResultSets) {
         this.ResultSets = ResultSets;
     }

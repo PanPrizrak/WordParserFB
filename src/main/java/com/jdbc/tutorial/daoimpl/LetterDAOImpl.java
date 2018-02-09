@@ -26,6 +26,10 @@ public class LetterDAOImpl implements LetterDAO{
     
     private SessionFactory sessionFactory;
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+    
     @Override
     public void addLetter(Letter l) {
         Session session = this.sessionFactory.openSession();
@@ -66,8 +70,8 @@ public class LetterDAOImpl implements LetterDAO{
     @Override
     public List<Letter> listLetter() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Letter> letterList = session.createQuery("from letter").list();
+        Session session = this.sessionFactory.openSession();
+        List<Letter> letterList = session.createQuery("from Letter").list();
         for (Letter l : letterList){
             logger.info("!!!Letter List::" + l + "!!!");
         }

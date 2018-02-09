@@ -79,7 +79,7 @@ public class SenderDAOImpl implements SenderDAO {
     public List<Sender> listSender() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Session session = this.sessionFactory.openSession();
-        List<Sender> senderList = session.createQuery("from sender").list();
+        List<Sender> senderList = session.createQuery("from Sender").list();
         for (Sender s : senderList){
             logger.info("!!!Sender List::" + s);
         }

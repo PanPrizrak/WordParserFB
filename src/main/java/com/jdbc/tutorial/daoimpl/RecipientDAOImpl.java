@@ -78,8 +78,8 @@ public class RecipientDAOImpl implements RecipientDAO{
     @Override
     public List<Recipient> listRecipient() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Recipient> recipientList = session.createQuery("from recipient").list();
+        Session session = this.sessionFactory.openSession();
+        List<Recipient> recipientList = session.createQuery("from Recipient").list();
         for (Recipient r : recipientList){
             logger.info("!!!Recipient List::" + r);
         }

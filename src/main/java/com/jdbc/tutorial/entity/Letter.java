@@ -6,7 +6,6 @@
 package com.jdbc.tutorial.entity;
 
 import java.util.Date;
-import javafx.scene.chart.PieChart.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,7 +46,7 @@ public class Letter {
     @Column (name = "l_message")
     private String message;
     
-    @Column (name = "l_workwer_id")
+    @Column (name = "l_worker_id")
     private int worker_id;
     
     @Column (name = "l_executor")

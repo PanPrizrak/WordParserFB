@@ -14,21 +14,7 @@
         <property name="password" value="root" />
     </bean>
 
-    <!-- Hibernate 3 XML SessionFactory Bean definition-->
-    <!-- 	<bean id="hibernate3SessionFactory"
-            class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-            <property name="dataSource" ref="dataSource" />
-            <property name="mappingResources">
-                    <list>
-                            <value>person.hbm.xml</value>
-                    </list>
-            </property>
-            <property name="hibernateProperties">
-                    <value>
-                            hibernate.dialect=org.hibernate.dialect.MySQLDialect
-                    </value>
-            </property>
-    </bean> -->
+    
 
     <!-- Hibernate 3 Annotation SessionFactory Bean definition-->
     <bean id="hibernate3AnnotatedSessionFactory"
@@ -41,7 +27,7 @@
                 <value>com.jdbc.tutorial.entity.Recipient</value>
                 <value>com.jdbc.tutorial.entity.Sender</value>
                 <value>com.jdbc.tutorial.entity.Tel</value>
-                <value>com.jdbc.tutorial.entity.Worker</value>
+                <value>com.jdbc.tutorial.entity.Worker</value> 
             </list>
         </property>
         <property name="hibernateProperties">
@@ -53,31 +39,14 @@
         </property>
     </bean>
     
-    <bean id="hibernate3AnnotatedSessionFactory"
-              class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="annotatedClasses">
-            <list>
-                <value>com.jdbc.tutorial.entity.Letter</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.current_session_context_class">thread</prop>
-                <prop key="hibernate.show_sql">false</prop>
-            </props>
-        </property>
-    </bean>
-	
 	
     <bean id="EmailDAO" class="com.jdbc.tutorial.daoimpl.EmailDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
    <bean id="LetterDAO" class="com.jdbc.tutorial.daoimpl.LetterDAOImpl">
-        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+       <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
-    <bean id="RecipientDAO" class="com.jdbc.tutorial.daoimpl.RecipientDAOImpl">
+     <bean id="RecipientDAO" class="com.jdbc.tutorial.daoimpl.RecipientDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
     <bean id="SenderDAO" class="com.jdbc.tutorial.daoimpl.SenderDAOImpl">
