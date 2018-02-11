@@ -31,10 +31,10 @@ public class Email {
     @Column(name="e_email")
     private String email;
     
-    @Column(name="e_sender_id")
+    @Column(name="e_sender_id",nullable = true)
     private int sender_id;
     
-    @Column(name="e_recipient_id")
+    @Column(name="e_recipient_id",nullable = true)
     private int recipient_id;
 
     public Email() {

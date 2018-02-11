@@ -42,9 +42,9 @@ public class FormSender extends javax.swing.JFrame {
         switch (buf) {
             case "add":
                 senderDAO.addSender(sender);
-            case "update":
+            case "update":{
                 sender.setId(NSR);
-                senderDAO.updateSender(sender);
+                senderDAO.updateSender(sender);}
         }
         this.refresh();
     }

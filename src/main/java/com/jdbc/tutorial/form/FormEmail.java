@@ -157,12 +157,12 @@ public class FormEmail extends javax.swing.JFrame {
         // TODO add your handling code here:
         email.setEmail(emailText.getText());
         if (senderText.getText().toString().length() == 0) {
-            email.setSender_id(0);
+            //email.setSender_id(0);
         } else {
             email.setSender_id(new Integer(senderText.getText()));
         }
         if (recipientText.getText().toString().length() == 0) {
-            email.setRecipient_id(0);
+            //email.setRecipient_id(0);
         } else {
             email.setRecipient_id(new Integer(recipientText.getText()));
         }
