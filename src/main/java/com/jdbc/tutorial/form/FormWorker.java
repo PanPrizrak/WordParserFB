@@ -8,6 +8,7 @@ package com.jdbc.tutorial.form;
 import com.jdbc.tutorial.entity.Worker;
 import com.jdbc.tutorial.dao.WorkerDAO;
 import com.jdbc.tutorial.model.WorkerTableModel;
+import com.jdbc.tutorial.main.RunFormMain;
 
 import javax.swing.table.TableModel;
 
@@ -238,9 +239,8 @@ public class FormWorker extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         context.close();
-        formPerson main = new formPerson();
-        main.setVisible(true);
         this.hide();
+        RunFormMain.Run();
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**

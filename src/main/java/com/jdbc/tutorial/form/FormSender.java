@@ -7,6 +7,7 @@ package com.jdbc.tutorial.form;
 
 import com.jdbc.tutorial.entity.Sender;
 import com.jdbc.tutorial.dao.SenderDAO;
+import com.jdbc.tutorial.main.RunFormMain;
 import com.jdbc.tutorial.model.SenderTableModel;
 
 import javax.swing.table.TableModel;
@@ -24,11 +25,10 @@ public class FormSender extends javax.swing.JFrame {
     private Sender sender = new Sender();
     private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
     private SenderDAO senderDAO = context.getBean(SenderDAO.class);
-    private SenderTableModel senderTablemodel = new SenderTableModel(senderDAO.listSender());
     private int NSR = 0;
     
     private void refresh(){
-        SenderTable.setModel(senderTablemodel);
+        SenderTable.setModel(new SenderTableModel(senderDAO.listSender()));
     }
     
     private void addORupadate(String buf){
@@ -43,6 +43,7 @@ public class FormSender extends javax.swing.JFrame {
             case "add":
                 senderDAO.addSender(sender);
             case "update":
+                sender.setId(NSR);
                 senderDAO.updateSender(sender);
         }
         this.refresh();
@@ -88,21 +89,11 @@ public class FormSender extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SenderTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         SenderTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SenderTableMouseClicked(evt);
@@ -148,7 +139,7 @@ public class FormSender extends javax.swing.JFrame {
 
         senderPanel.setBackground(new java.awt.Color(255, 255, 255));
         senderPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        senderPanel.setLayout(new java.awt.GridLayout(3, 1));
+        senderPanel.setLayout(new java.awt.GridLayout(4, 1));
 
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +164,14 @@ public class FormSender extends javax.swing.JFrame {
             }
         });
         senderPanel.add(removeButton);
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        senderPanel.add(backButton);
 
         getContentPane().add(senderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 220, 120));
 
@@ -207,6 +206,13 @@ public class FormSender extends javax.swing.JFrame {
         senderDAO.removeSender(NSR);
         this.refresh();
     }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        context.close();
+        this.hide();
+        RunFormMain.Run();
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,6 +254,7 @@ public class FormSender extends javax.swing.JFrame {
     private javax.swing.JButton addButton;
     private javax.swing.JLabel adresLabel;
     private javax.swing.JTextField adresText;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel bankLabel;
     private javax.swing.JTextField bankText;
     private javax.swing.JPanel dataPanel;

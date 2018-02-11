@@ -40,6 +40,12 @@ public class EmailTableModel extends AbstractTableModel {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return this.colnum;
     }
+    
+    @Override
+    public String getColumnName(int param) {
+
+        return colNames[param];
+    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {

@@ -8,6 +8,7 @@ package com.jdbc.tutorial.form;
 import com.jdbc.tutorial.entity.Tel;
 import com.jdbc.tutorial.dao.TelDAO;
 import com.jdbc.tutorial.model.TelTableModel;
+import com.jdbc.tutorial.main.RunFormMain;
 
 
 import javax.swing.table.TableModel;
@@ -26,11 +27,10 @@ public class FormTel extends javax.swing.JFrame {
     private Tel tel = new Tel();
     private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
     private final TelDAO telDAO = context.getBean(TelDAO.class);
-    private final TelTableModel telTableModel = new TelTableModel(telDAO.listTel());
     private int NSR = 0;
     
     private void refresh(){
-        TelTable.setModel(telTableModel);
+        TelTable.setModel(new TelTableModel(telDAO.listTel()));
     }
     
     private void addORupdate(String buf){
@@ -41,6 +41,7 @@ public class FormTel extends javax.swing.JFrame {
             case "add":
                 telDAO.addTell(tel);
             case "update":
+                tel.setId(NSR);
                 telDAO.updateTel(tel);
         }
         this.refresh();
@@ -73,6 +74,7 @@ public class FormTel extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 600));
@@ -86,13 +88,10 @@ public class FormTel extends javax.swing.JFrame {
 
         TelTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         TelTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -118,7 +117,7 @@ public class FormTel extends javax.swing.JFrame {
         dataPanel.add(recipientText);
 
         senderPanel.setBackground(new java.awt.Color(255, 255, 255));
-        senderPanel.setLayout(new java.awt.GridLayout(3, 1));
+        senderPanel.setLayout(new java.awt.GridLayout(4, 1));
 
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +142,14 @@ public class FormTel extends javax.swing.JFrame {
             }
         });
         senderPanel.add(removeButton);
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        senderPanel.add(backButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,6 +207,13 @@ public class FormTel extends javax.swing.JFrame {
         this.refresh();
     }//GEN-LAST:event_removeButtonActionPerformed
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        context.close();
+        this.hide();
+        RunFormMain.Run();
+    }//GEN-LAST:event_backButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,6 +252,7 @@ public class FormTel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TelTable;
     private javax.swing.JButton addButton;
+    private javax.swing.JButton backButton;
     private javax.swing.JPanel dataPanel;
     private javax.swing.JButton editButton;
     private javax.swing.JLabel recipientLabel;

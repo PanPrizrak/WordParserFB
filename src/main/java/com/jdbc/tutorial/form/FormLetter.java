@@ -7,6 +7,7 @@ package com.jdbc.tutorial.form;
 
 import com.jdbc.tutorial.entity.Letter;
 import com.jdbc.tutorial.dao.LetterDAO;
+import com.jdbc.tutorial.main.RunFormMain;
 import com.jdbc.tutorial.model.LetterTableModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,11 +32,10 @@ public class FormLetter extends javax.swing.JFrame {
     private Letter letter = new Letter();
     private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
     private final LetterDAO letterDAO = context.getBean(LetterDAO.class);
-    private final LetterTableModel letterTableModel = new LetterTableModel(letterDAO.listLetter());
     private int NSR = 0;
     
     private void refresh(){
-        LetterTable.setModel(letterTableModel);
+        LetterTable.setModel(new LetterTableModel(letterDAO.listLetter()));
     }
     
     private void addORupdate(String buf) throws ParseException{
@@ -56,6 +56,7 @@ public class FormLetter extends javax.swing.JFrame {
             case "add":
                 letterDAO.addLetter(letter);
             case "update":
+                letter.setId(NSR);
                 letterDAO.updateLetter(letter);
         }
         this.refresh();
@@ -98,21 +99,11 @@ public class FormLetter extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("FormLetter"); // NOI18N
 
-        LetterTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         LetterTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LetterTableMouseClicked(evt);
@@ -156,7 +147,7 @@ public class FormLetter extends javax.swing.JFrame {
         dataPanel.add(executorText);
 
         SenderPanel.setBackground(new java.awt.Color(255, 255, 255));
-        SenderPanel.setLayout(new java.awt.GridLayout(3, 1));
+        SenderPanel.setLayout(new java.awt.GridLayout(4, 1));
 
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +172,14 @@ public class FormLetter extends javax.swing.JFrame {
             }
         });
         SenderPanel.add(removeButton);
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        SenderPanel.add(backButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,6 +249,13 @@ public class FormLetter extends javax.swing.JFrame {
         this.refresh();
     }//GEN-LAST:event_removeButtonActionPerformed
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        context.close();
+        this.hide();
+        RunFormMain.Run();
+    }//GEN-LAST:event_backButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -290,6 +296,7 @@ public class FormLetter extends javax.swing.JFrame {
     private javax.swing.JTable LetterTable;
     private javax.swing.JPanel SenderPanel;
     private javax.swing.JButton addButton;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel dataLabel;
     private javax.swing.JPanel dataPanel;
     private javax.swing.JTextField dataText;

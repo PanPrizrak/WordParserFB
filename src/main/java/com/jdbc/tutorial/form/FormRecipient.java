@@ -7,6 +7,7 @@ package com.jdbc.tutorial.form;
 
 import com.jdbc.tutorial.entity.Recipient;
 import com.jdbc.tutorial.dao.RecipientDAO;
+import com.jdbc.tutorial.main.RunFormMain;
 import com.jdbc.tutorial.model.RecipientTableModel;
 
 import javax.swing.table.TableModel;
@@ -23,13 +24,12 @@ public class FormRecipient extends javax.swing.JFrame {
      */
     
     private Recipient recipient = new Recipient();
-    private final ClassPathXmlApplicationContext comtext = new ClassPathXmlApplicationContext("springFB.xml");
-    private final RecipientDAO recipientDAO = comtext.getBean(RecipientDAO.class);
-    private RecipientTableModel recipientTableModel = new RecipientTableModel(recipientDAO.listRecipient());
+    private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
+    private final RecipientDAO recipientDAO = context.getBean(RecipientDAO.class);
     private int NSR = 0;
     
     private void refresh(){
-        RecipientTable.setModel(recipientTableModel);
+        RecipientTable.setModel(new RecipientTableModel(recipientDAO.listRecipient()));
     }
     
     private void addORupdate(String buf){
@@ -38,6 +38,7 @@ public class FormRecipient extends javax.swing.JFrame {
             case "add":
                 recipientDAO.addRecipient(recipient);
             case "update":
+                recipient.setId(NSR);
                 recipientDAO.updateRecipient(recipient);
         }
         this.refresh();
@@ -64,21 +65,11 @@ public class FormRecipient extends javax.swing.JFrame {
         addButtom = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        RecipientTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         RecipientTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RecipientTableMouseClicked(evt);
@@ -139,6 +130,14 @@ public class FormRecipient extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         getContentPane().add(removeButton, gridBagConstraints);
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backButton, new java.awt.GridBagConstraints());
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -165,6 +164,13 @@ public class FormRecipient extends javax.swing.JFrame {
         recipientDAO.removeRecipient(NSR);
         this.refresh();
     }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        context.close();
+        this.hide();
+        RunFormMain.Run();
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,6 +210,7 @@ public class FormRecipient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable RecipientTable;
     private javax.swing.JButton addButtom;
+    private javax.swing.JButton backButton;
     private javax.swing.JButton editButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameText;
