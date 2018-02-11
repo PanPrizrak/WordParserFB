@@ -45,7 +45,7 @@ public class WorkerDAOImpl implements WorkerDAO {
     public void updateWorker(Worker w) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Session session = this.sessionFactory.getCurrentSession();
-        session.beginTransaction().begin();
+        session.getTransaction().begin();
         session.update(w);
         session.getTransaction().commit();
         logger.info("!!!Worker updated succesfully, worker details = " + w + "!!!");

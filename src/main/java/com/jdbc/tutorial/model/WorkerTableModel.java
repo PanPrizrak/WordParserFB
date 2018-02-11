@@ -19,7 +19,8 @@ public class WorkerTableModel extends AbstractTableModel {
 
     private int colnum = 6;
     private int rownum;
-    private String[] colNames = {"ID", "Position", "Name", "Sname", "Patronymic", "Recipient"};
+    private String[] colNames = {
+        "ID", "Position", "Name", "Sname", "Patronymic", "Recipient"};
     private List<Worker> ResultSets;
 
     public WorkerTableModel() {
@@ -63,4 +64,11 @@ public class WorkerTableModel extends AbstractTableModel {
                 return null;
         }
     }
+    
+    @Override
+    public String getColumnName(int param) {
+
+        return colNames[param];
+    }
+    
 }

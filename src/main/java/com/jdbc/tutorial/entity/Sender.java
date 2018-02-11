@@ -28,7 +28,7 @@ public class Sender {
     @Column (name = "s_ved")
     private String ved;
     
-    @Column (name = "s_name")
+    @Column (name = "s_name_s")
     private String name;
     
     @Column (name = "s_adres")
@@ -40,7 +40,7 @@ public class Sender {
     @Column (name = "s_bank")
     private String bank;
     
-    @Column (name = "kodbank")
+    @Column (name = "s_kodbank")
     private String kodbank;
     
     @Column (name = "s_unp")

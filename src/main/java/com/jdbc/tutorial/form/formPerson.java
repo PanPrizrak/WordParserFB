@@ -61,6 +61,11 @@ public class formPerson extends javax.swing.JFrame {
         workerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTable1.setModel( new PersonTableModel(personDAO.listPerson()));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,9 +172,7 @@ public class formPerson extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(letterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(letterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -196,6 +199,7 @@ public class formPerson extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -240,38 +244,48 @@ public class formPerson extends javax.swing.JFrame {
         // TODO add your handling code here:
         FormEmail emailForm = new FormEmail();
         emailForm.setVisible(true);
-        
+        this.setVisible(false);
     }//GEN-LAST:event_emailButtonActionPerformed
 
     private void letterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_letterButtonActionPerformed
         // TODO add your handling code here:
         FormLetter letterForm = new FormLetter();
         letterForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_letterButtonActionPerformed
 
     private void recipientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recipientButtonActionPerformed
         // TODO add your handling code here:
         FormRecipient recipientForm = new FormRecipient();
         recipientForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_recipientButtonActionPerformed
 
     private void senderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senderButtonActionPerformed
         // TODO add your handling code here:
         FormSender senderForm = new FormSender();
         senderForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_senderButtonActionPerformed
 
     private void telButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telButtonActionPerformed
         // TODO add your handling code here:
         FormTel telForm = new FormTel();
         telForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_telButtonActionPerformed
 
     private void workerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workerButtonActionPerformed
         // TODO add your handling code here:
         FormWorker workerForm = new FormWorker();
         workerForm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_workerButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        context.close();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

@@ -25,11 +25,10 @@ public class FormWorker extends javax.swing.JFrame {
     private final Worker worker = new Worker();
     private final ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springFB.xml");
     private final WorkerDAO workerDAO = context.getBean(WorkerDAO.class);
-    private final WorkerTableModel workerTableModel = new WorkerTableModel(workerDAO.listWorker());
     private int NSR = 0;
     
     private void refresh(){
-        WorkerTable.setModel(workerTableModel);
+        WorkerTable.setModel(new WorkerTableModel(workerDAO.listWorker()));
     }
     
     private void addORupdate(String buf){
@@ -42,6 +41,7 @@ public class FormWorker extends javax.swing.JFrame {
             case "add":
                 workerDAO.addWorker(worker);
             case "update":
+                worker.setId(NSR);
                 workerDAO.updateWorker(worker);
         }
         this.refresh();
@@ -54,6 +54,7 @@ public class FormWorker extends javax.swing.JFrame {
     
     public FormWorker() {
         initComponents();
+        this.refresh();
     }
 
     /**
@@ -82,18 +83,24 @@ public class FormWorker extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                нет(evt);
+            }
+        });
 
         WorkerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         WorkerTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,7 +136,7 @@ public class FormWorker extends javax.swing.JFrame {
 
         senderPanel.setBackground(new java.awt.Color(255, 255, 255));
         senderPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        senderPanel.setLayout(new java.awt.GridLayout(3, 1));
+        senderPanel.setLayout(new java.awt.GridLayout(4, 1));
 
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +161,14 @@ public class FormWorker extends javax.swing.JFrame {
             }
         });
         senderPanel.add(removeButton);
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        senderPanel.add(backButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,6 +197,7 @@ public class FormWorker extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void WorkerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_WorkerTableMouseClicked
@@ -210,6 +226,22 @@ public class FormWorker extends javax.swing.JFrame {
         workerDAO.removeWorker(NSR);
         this.refresh();
     }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void нет(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_нет
+        // TODO add your handling code here:
+    }//GEN-LAST:event_нет
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        context.close();
+        formPerson main = new formPerson();
+        main.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +281,7 @@ public class FormWorker extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable WorkerTable;
     private javax.swing.JButton addButton;
+    private javax.swing.JButton backButton;
     private javax.swing.JPanel dataPanel;
     private javax.swing.JButton editButton;
     private javax.swing.JScrollPane jScrollPane1;
