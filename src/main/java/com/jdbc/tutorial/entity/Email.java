@@ -5,12 +5,14 @@
  */
 package com.jdbc.tutorial.entity;
 
+import java.sql.JDBCType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import org.hibernate.engine.VersionValue;
 
 
 
@@ -32,10 +34,10 @@ public class Email {
     private String email;
     
     @Column(name="e_sender_id",nullable = true)
-    private int sender_id;
+    private Integer sender_id;
     
     @Column(name="e_recipient_id",nullable = true)
-    private int recipient_id;
+    private Integer recipient_id;
 
     public Email() {
     }
@@ -63,19 +65,19 @@ public class Email {
         this.email = email;
     }
 
-    public int getSender_id() {
+    public Integer getSender_id() {
         return sender_id;
     }
 
-    public void setSender_id(int sender_id) {
+    public void setSender_id(Integer sender_id) {
         this.sender_id = sender_id;
     }
 
-    public int getRecipient_id() {
+    public Integer getRecipient_id() {
         return recipient_id;
     }
 
-    public void setRecipient_id(int recipient_id) {
+    public void setRecipient_id(Integer recipient_id) {
         this.recipient_id = recipient_id;
     }
 
@@ -83,6 +85,4 @@ public class Email {
     public String toString() {
         return "Email{" + "id=" + id + ", email=" + email + ", sender_id=" + sender_id + ", recipient_id=" + recipient_id + '}';
     }
-    
-    
 }

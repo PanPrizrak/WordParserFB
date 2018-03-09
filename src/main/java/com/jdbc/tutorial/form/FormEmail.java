@@ -9,6 +9,7 @@ import com.jdbc.tutorial.entity.Email;
 import com.jdbc.tutorial.dao.EmailDAO;
 import com.jdbc.tutorial.main.RunFormMain;
 import com.jdbc.tutorial.model.EmailTableModel;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.TableModel;
 
@@ -155,19 +156,24 @@ public class FormEmail extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        email.setEmail(emailText.getText());
+       email.setEmail(emailText.getText());
         if (senderText.getText().toString().length() == 0) {
-            //email.setSender_id(0);
+            email.setSender_id(null);
         } else {
             email.setSender_id(new Integer(senderText.getText()));
         }
         if (recipientText.getText().toString().length() == 0) {
-            //email.setRecipient_id(0);
+            email.setRecipient_id(null);
         } else {
             email.setRecipient_id(new Integer(recipientText.getText()));
         }
         emailDAO.addEmail(email);
         EmailTable.setModel(new EmailTableModel(emailDAO.listEmail()));
+       String buf;
+       if(senderText.getText()==null)
+           buf="true";
+       else buf="false";
+       JOptionPane.showMessageDialog(null, buf);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
