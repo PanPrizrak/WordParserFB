@@ -18,6 +18,7 @@ public interface TelDAO {
     public void updateTel(Tel t);
     public Tel getTelById(int id);
     public void removeTel(int id);
+    public void searchField();
     public List<Tel> listTel();
     
 }

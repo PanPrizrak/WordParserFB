@@ -29,16 +29,16 @@ public class Tel {
     @Column (name = "t_tel")
     private String tel;
     
-    @Column(name="t_sender_id")
-    private int sender_id;
+    @Column(name="t_sender_id",nullable = true)
+    private Integer sender_id;
     
-    @Column(name="t_recipient_id")
-    private int recipient_id;
+    @Column(name="t_recipient_id",nullable = true)
+    private Integer recipient_id;
 
     public Tel() {
     }
 
-    public Tel(int id, String tel, int sender_id, int recipient_id) {
+    public Tel(int id, String tel, Integer sender_id, Integer recipient_id) {
         this.id = id;
         this.tel = tel;
         this.sender_id = sender_id;
@@ -61,19 +61,19 @@ public class Tel {
         this.tel = tel;
     }
 
-    public int getSender_id() {
+    public Integer getSender_id() {
         return sender_id;
     }
 
-    public void setSender_id(int sender_id) {
+    public void setSender_id(Integer sender_id) {
         this.sender_id = sender_id;
     }
 
-    public int getRecipient_id() {
+    public Integer getRecipient_id() {
         return recipient_id;
     }
 
-    public void setRecipient_id(int recipient_id) {
+    public void setRecipient_id(Integer recipient_id) {
         this.recipient_id = recipient_id;
     }
 

@@ -43,8 +43,6 @@ public class FormEmail extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tablePanel = new javax.swing.JPanel();
-        EmailTable = new javax.swing.JTable();
         dataPanel = new javax.swing.JPanel();
         emailLabel = new javax.swing.JLabel();
         emailText = new javax.swing.JTextField();
@@ -57,22 +55,14 @@ public class FormEmail extends javax.swing.JFrame {
         editButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        EmailTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
         setMinimumSize(new java.awt.Dimension(600, 600));
         setName("FormEmail"); // NOI18N
         setSize(new java.awt.Dimension(600, 600));
-
-        tablePanel.setBackground(new java.awt.Color(255, 255, 255));
-        tablePanel.setLayout(new java.awt.GridLayout(1, 1));
-
-        EmailTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EmailTableMouseClicked(evt);
-            }
-        });
-        tablePanel.add(EmailTable);
 
         dataPanel.setBackground(new java.awt.Color(255, 255, 255));
         dataPanel.setLayout(new java.awt.GridLayout(3, 2));
@@ -124,29 +114,36 @@ public class FormEmail extends javax.swing.JFrame {
         });
         senderPanel.add(backButton);
 
+        EmailTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EmailTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(EmailTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
+                        .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -252,12 +249,12 @@ public class FormEmail extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailText;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel recipientLabel;
     private javax.swing.JTextField recipientText;
     private javax.swing.JButton removeButton;
     private javax.swing.JLabel senderLabel;
     private javax.swing.JPanel senderPanel;
     private javax.swing.JTextField senderText;
-    private javax.swing.JPanel tablePanel;
     // End of variables declaration//GEN-END:variables
 }

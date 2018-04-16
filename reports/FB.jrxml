@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.0.final using JasperReports Library version 6.5.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FB" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4fa4297a-673e-4fa7-8afd-024053bf1596">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Letterhead"/>
 	<subDataset name="company" uuid="19d08112-b27c-4c0d-a747-d1cefd8dd675">
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
 	</subDataset>
-	<parameter name="ministr" class="java.lang.String"/>
+	<parameter name="ved_by" class="java.lang.String"/>
+	<parameter name="name_by" class="java.lang.String"/>
+	<parameter name="adres_by" class="java.lang.String"/>
+	<parameter name="tel_by" class="java.lang.String"/>
+	<parameter name="email_by" class="java.lang.String"/>
+	<parameter name="rs_by" class="java.lang.String"/>
+	<parameter name="bank_by" class="java.lang.String"/>
+	<parameter name="kod_by" class="java.lang.String"/>
+	<parameter name="unp_by" class="java.lang.String"/>
+	<parameter name="ved" class="java.lang.String"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="adres" class="java.lang.String"/>
+	<parameter name="tel" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="rs" class="java.lang.String"/>
+	<parameter name="bank" class="java.lang.String"/>
+	<parameter name="kod" class="java.lang.String"/>
+	<parameter name="unp" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -22,18 +39,18 @@
 				<imageExpression><![CDATA["logo.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="-20" y="50" width="300" height="238" uuid="3ed3e40e-e50d-44b8-873d-7c10fdd36e27"/>
+				<reportElement x="-20" y="50" width="300" height="60" uuid="3ed3e40e-e50d-44b8-873d-7c10fdd36e27"/>
 				<textElement textAlignment="Center">
-					<font fontName="Serif"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{ministr}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{ved_by}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="280" y="50" width="295" height="238" uuid="1f44a37f-72f5-4fcd-8f5e-9b9c818976c5"/>
+				<reportElement x="-20" y="110" width="300" height="60" uuid="861fbb92-0c29-4490-9c3b-747cb4d6f286"/>
 				<textElement textAlignment="Center">
-					<font fontName="Serif"/>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{name_by}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

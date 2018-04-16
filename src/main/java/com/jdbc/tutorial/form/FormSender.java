@@ -9,8 +9,13 @@ import com.jdbc.tutorial.entity.Sender;
 import com.jdbc.tutorial.dao.SenderDAO;
 import com.jdbc.tutorial.main.RunFormMain;
 import com.jdbc.tutorial.model.SenderTableModel;
+import com.jdbc.tutorial.wordparserfb.FB;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JRException;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
@@ -90,6 +95,7 @@ public class FormSender extends javax.swing.JFrame {
         editButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -139,7 +145,7 @@ public class FormSender extends javax.swing.JFrame {
 
         senderPanel.setBackground(new java.awt.Color(255, 255, 255));
         senderPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        senderPanel.setLayout(new java.awt.GridLayout(4, 1));
+        senderPanel.setLayout(new java.awt.GridLayout(5, 1));
 
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +178,14 @@ public class FormSender extends javax.swing.JFrame {
             }
         });
         senderPanel.add(backButton);
+
+        jButton1.setText("Report");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        senderPanel.add(jButton1);
 
         getContentPane().add(senderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 220, 120));
 
@@ -213,6 +227,19 @@ public class FormSender extends javax.swing.JFrame {
         this.hide();
         RunFormMain.Run();
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            FB fb=new FB();
+           // fb.setSender(senderDAO.getSenderById(NSR));
+           // fb.setName(nameText.getText());
+            fb.run();
+        } catch (JRException ex) {
+            Logger.getLogger(FormSender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, vedText.getText());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +286,7 @@ public class FormSender extends javax.swing.JFrame {
     private javax.swing.JTextField bankText;
     private javax.swing.JPanel dataPanel;
     private javax.swing.JButton editButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel kodbankLabel;
     private javax.swing.JTextField kodbankText;

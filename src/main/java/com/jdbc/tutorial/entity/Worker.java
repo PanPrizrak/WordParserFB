@@ -25,25 +25,25 @@ public class Worker {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column (name = "w_position")
+    @Column (name = "w_position",nullable = true)
     private String position;
     
-    @Column (name = "W_name")
+    @Column (name = "W_name",nullable = true)
     private String name;
     
-    @Column (name = "w_sname")
+    @Column (name = "w_sname",nullable = true)
     private String sname;
     
-    @Column (name = "w_patronymic")
+    @Column (name = "w_patronymic",nullable = true)
     private String patronymic;
     
-    @Column (name = "w_recipient_id")
-    private int recipient_id;
+    @Column (name = "w_recipient_id",nullable = true)
+    private Integer recipient_id;
 
     public Worker() {
     }
 
-    public Worker(int id, String position, String name, String sname, String patronymic, int recipient_id) {
+    public Worker(int id, String position, String name, String sname, String patronymic, Integer recipient_id) {
         this.id = id;
         this.position = position;
         this.name = name;
@@ -92,11 +92,11 @@ public class Worker {
         this.patronymic = patronymic;
     }
 
-    public int getRecipient_id() {
+    public Integer getRecipient_id() {
         return recipient_id;
     }
 
-    public void setRecipient_id(int recipient_id) {
+    public void setRecipient_id(Integer recipient_id) {
         this.recipient_id = recipient_id;
     }
 

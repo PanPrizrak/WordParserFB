@@ -129,5 +129,8 @@ public class Sender {
         return "Sender{" + "id=" + id + ", ved=" + ved + ", name=" + name + ", adres=" + adres + ", rs=" + rs + ", bank=" + bank + ", kodbank=" + kodbank + ", unp=" + unp + '}';
     }
     
+    public String toSender(){
+        return ved + " \n" + name + " \n" + adres + " " + rs + " \n" + bank + " " + kodbank + " " + unp;
+    }   
     
 }

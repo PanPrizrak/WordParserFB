@@ -33,29 +33,29 @@ public class Letter {
     @Column (name = "l_recipient_id")
     private int recipient_id;
     
-    @Column (name = "l_data")
+    @Column (name = "l_data",nullable = true)
     @Temporal (value = TemporalType.DATE)
     private Date data;
     
-    @Column (name = "l_number")
-    private int number;
+    @Column (name = "l_number",nullable = true)
+    private Integer number;
     
-    @Column (name = "l_subject")
+    @Column (name = "l_subject",nullable = true)
     private String subject;
     
-    @Column (name = "l_message")
+    @Column (name = "l_message",nullable = true)
     private String message;
     
-    @Column (name = "l_worker_id")
-    private int worker_id;
+    @Column (name = "l_worker_id",nullable = true)
+    private Integer worker_id;
     
-    @Column (name = "l_executor")
+    @Column (name = "l_executor",nullable = true)
     private String executor;
 
     public Letter() {
     }
 
-    public Letter(int id, int sender_id, int recipient_id, Date data, int number, String subject, String message, int worker_id, String executor) {
+    public Letter(int id, int sender_id, int recipient_id, Date data, Integer number, String subject, String message, Integer worker_id, String executor) {
         this.id = id;
         this.sender_id = sender_id;
         this.recipient_id = recipient_id;
@@ -99,11 +99,11 @@ public class Letter {
         this.data = data;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -123,11 +123,11 @@ public class Letter {
         this.message = message;
     }
 
-    public int getWorker_id() {
+    public Integer getWorker_id() {
         return worker_id;
     }
 
-    public void setWorker_id(int worker_id) {
+    public void setWorker_id(Integer worker_id) {
         this.worker_id = worker_id;
     }
 

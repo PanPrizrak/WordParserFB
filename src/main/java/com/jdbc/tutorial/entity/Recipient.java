@@ -25,7 +25,7 @@ public class Recipient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "r_name")
+    @Column(name = "r_name",nullable = true)
     private String name;
 
     public Recipient() {

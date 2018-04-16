@@ -9,6 +9,7 @@ import com.jdbc.tutorial.dao.SenderDAO;
 import com.jdbc.tutorial.entity.Sender;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -56,8 +57,20 @@ public class SenderDAOImpl implements SenderDAO {
     public Sender getSenderById(int id) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Session session = this.sessionFactory.getCurrentSession();
+        session.getTransaction().begin();
         Sender s = (Sender) session.load(Sender.class, new Integer(id));
+        //JOptionPane.showMessageDialog(null,s.toString());
+        //
         logger.info("!!!Sender loaded succesfully, sender details = " + s + "!!!");
+       /*load() не достает объект из базы - он просто создает класс-обертку (proxy), 
+        которая в случае первого обращения к ней будет делать запрос в БД. 
+        Get же делает запрос сразу. Об этом есть в Hibernate Tutorial.
+        В твоем случае ты создаешь proxy, однако сразу после этого закрываешь сессию, 
+        соответственно запрос к БД уже не сделать и выбрасывается исключение. 
+        Поэтому либо нужно использовать get() либо hibernate session должна 
+        быть все еще открыта когда обращаешься к полям неинициализированной прокси.
+        */
+        session.getTransaction().commit();
         return s;
     }
 

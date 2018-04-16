@@ -61,8 +61,6 @@ public class FormTel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tablePanel = new javax.swing.JPanel();
-        TelTable = new javax.swing.JTable();
         dataPanel = new javax.swing.JPanel();
         telLabel = new javax.swing.JLabel();
         telText = new javax.swing.JTextField();
@@ -75,31 +73,13 @@ public class FormTel extends javax.swing.JFrame {
         editButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TelTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 600));
         setName("FormTel"); // NOI18N
         setSize(new java.awt.Dimension(600, 600));
-
-        tablePanel.setBackground(new java.awt.Color(255, 255, 255));
-        tablePanel.setMinimumSize(new java.awt.Dimension(300, 64));
-        tablePanel.setPreferredSize(new java.awt.Dimension(300, 64));
-        tablePanel.setLayout(new java.awt.GridLayout(1, 0));
-
-        TelTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        TelTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TelTableMouseClicked(evt);
-            }
-        });
-        tablePanel.add(TelTable);
 
         dataPanel.setBackground(new java.awt.Color(255, 255, 255));
         dataPanel.setLayout(new java.awt.GridLayout(3, 2));
@@ -151,6 +131,13 @@ public class FormTel extends javax.swing.JFrame {
         });
         senderPanel.add(backButton);
 
+        TelTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TelTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TelTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,9 +145,9 @@ public class FormTel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -169,12 +156,12 @@ public class FormTel extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(senderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,13 +242,13 @@ public class FormTel extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JPanel dataPanel;
     private javax.swing.JButton editButton;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel recipientLabel;
     private javax.swing.JTextField recipientText;
     private javax.swing.JButton removeButton;
     private javax.swing.JLabel senderLabel;
     private javax.swing.JPanel senderPanel;
     private javax.swing.JTextField senderText;
-    private javax.swing.JPanel tablePanel;
     private javax.swing.JLabel telLabel;
     private javax.swing.JTextField telText;
     // End of variables declaration//GEN-END:variables
