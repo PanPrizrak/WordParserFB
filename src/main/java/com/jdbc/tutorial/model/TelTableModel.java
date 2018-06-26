@@ -53,10 +53,21 @@ public class TelTableModel extends AbstractTableModel {
                 return t.getId();
             case 1:
                 return t.getTel();
-            case 2:
-                return t.getSender_id();
-            case 3:
+            case 2:{
+                if (t.getSender_id() == null)
+                    return "";
+                else
+                 return t.getSender_id();
+            //break;
+            }
+               
+            case 3:{
+                if(t.getRecipient_id() == null)
+                    return "";
+                else
                 return t.getRecipient_id();
+            //break;
+            }
             default:
                 return null;
         }

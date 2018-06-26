@@ -45,11 +45,13 @@ public class FormSender extends javax.swing.JFrame {
         sender.setKodbank(kodbankText.getText().toString());
         sender.setUnp(new Integer(unpText.getText()));
         switch (buf) {
-            case "add":
+            case "add":{
                 senderDAO.addSender(sender);
+                break;}
             case "update":{
                 sender.setId(NSR);
-                senderDAO.updateSender(sender);}
+                senderDAO.updateSender(sender);
+                break;}
         }
         this.refresh();
     }
@@ -190,6 +192,7 @@ public class FormSender extends javax.swing.JFrame {
         getContentPane().add(senderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 220, 120));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SenderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SenderTableMouseClicked

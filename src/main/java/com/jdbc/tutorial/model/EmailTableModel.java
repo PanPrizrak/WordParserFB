@@ -58,12 +58,21 @@ public class EmailTableModel extends AbstractTableModel {
             case 1:
                 return e.getEmail();
             //break;
-            case 2:
-                return e.getSender_id();
+            case 2:{
+                if (e.getSender_id() == null)
+                    return "";
+                else
+                 return e.getSender_id();
             //break;
-            case 3:
+            }
+               
+            case 3:{
+                if(e.getRecipient_id() == null)
+                    return "";
+                else
                 return e.getRecipient_id();
             //break;
+            }
             default:
                 return null;
         }

@@ -33,11 +33,22 @@ public class TelDAOImpl implements TelDAO {
     @Override
     public void addTell(Tel t) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        Session session = this.sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.persist(t);
+        /* session = this.sessionFactory.openSession();
+        Transaction tx = session.getTransaction();
+        tx.begin();
+        session.persist(t); 
+         tx.commit();
+       
         session.close();
+        */
+        Session session = this.sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(t);
+        session.flush();
+        session.getTransaction().commit();
         logger.info("!!!Tel saved succesfully, tel details = " + t + "!!!");
+        
+       
     }
 
     @Override
@@ -83,6 +94,11 @@ public class TelDAOImpl implements TelDAO {
         }
         session.close();
         return telList;
+    }
+
+    @Override
+    public void searchField() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

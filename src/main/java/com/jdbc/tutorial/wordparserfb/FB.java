@@ -98,7 +98,8 @@ public class FB {
         TelDAO telDAO = context.getBean(TelDAO.class);
         sender_by = senderDAO.getSenderById(1);
         sender = senderDAO.getSenderById(2);
-        tel = 
+        tel = telDAO.getTelById(0);
+        email = emailDAO.getEmailById(0);
         
         
     }

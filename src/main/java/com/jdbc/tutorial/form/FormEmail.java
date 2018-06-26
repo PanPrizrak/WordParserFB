@@ -29,9 +29,39 @@ public class FormEmail extends javax.swing.JFrame {
     private final EmailDAO emailDAO = context.getBean(EmailDAO.class);
     private int NSR = 0;
 
+    private void refresh() {
+        EmailTable.setModel(new EmailTableModel(emailDAO.listEmail()));
+    }
+
+    private void addORupdate(String buf) {
+        email.setEmail(emailText.getText());
+        if (senderText.getText().toString().length() == 0) {
+            email.setSender_id(null);
+        } else {
+            email.setSender_id(new Integer(senderText.getText()));
+        }
+        if (recipientText.getText().toString().length() == 0) {
+            email.setRecipient_id(null);
+        } else {
+            email.setRecipient_id(new Integer(recipientText.getText()));
+        }
+        switch (buf) {
+            case "add": {
+                emailDAO.addEmail(email);
+                break;
+            }
+            case "update": {
+                email.setId(NSR);
+                emailDAO.updateEmail(email);
+                break;
+            }
+        }
+        refresh();
+    }
+
     public FormEmail() {
         initComponents();
-        EmailTable.setModel(new EmailTableModel(emailDAO.listEmail()));
+        refresh();
     }
 
     /**
@@ -59,10 +89,10 @@ public class FormEmail extends javax.swing.JFrame {
         EmailTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAutoRequestFocus(false);
-        setMinimumSize(new java.awt.Dimension(600, 600));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMinimumSize(new java.awt.Dimension(414, 217));
         setName("FormEmail"); // NOI18N
-        setSize(new java.awt.Dimension(600, 600));
+        setSize(new java.awt.Dimension(414, 217));
 
         dataPanel.setBackground(new java.awt.Color(255, 255, 255));
         dataPanel.setLayout(new java.awt.GridLayout(3, 2));
@@ -128,22 +158,22 @@ public class FormEmail extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(senderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -152,35 +182,12 @@ public class FormEmail extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
-       email.setEmail(emailText.getText());
-        if (senderText.getText().toString().length() == 0) {
-            email.setSender_id(null);
-        } else {
-            email.setSender_id(new Integer(senderText.getText()));
-        }
-        if (recipientText.getText().toString().length() == 0) {
-            email.setRecipient_id(null);
-        } else {
-            email.setRecipient_id(new Integer(recipientText.getText()));
-        }
-        emailDAO.addEmail(email);
-        EmailTable.setModel(new EmailTableModel(emailDAO.listEmail()));
-       String buf;
-       if(senderText.getText()==null)
-           buf="true";
-       else buf="false";
-       JOptionPane.showMessageDialog(null, buf);
+        addORupdate("add");
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
-        email.setId(NSR);
-        email.setEmail(emailText.getText());
-        email.setSender_id(new Integer(senderText.getText()));
-        email.setRecipient_id(new Integer(recipientText.getText()));
-        emailDAO.updateEmail(email);
-        EmailTable.setModel(new EmailTableModel(emailDAO.listEmail()));
+        addORupdate("update");
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed

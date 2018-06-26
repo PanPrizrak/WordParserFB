@@ -35,16 +35,30 @@ public class FormTel extends javax.swing.JFrame {
     
     private void addORupdate(String buf){
         tel.setTel(telText.getText());
-        tel.setSender_id(new Integer(senderText.getText()));
-        tel.setRecipient_id(new Integer(recipientText.getText()));
+        if (senderText.getText().toString().length() == 0) {
+            tel.setSender_id(null);
+        } else {
+            tel.setSender_id(new Integer(senderText.getText()));
+        }
+        if (recipientText.getText().toString().length() == 0) {
+            tel.setRecipient_id(null);
+        } else {
+            tel.setRecipient_id(new Integer(recipientText.getText()));
+        }
         switch(buf){
-            case "add":
+            case "add":{
                 telDAO.addTell(tel);
-            case "update":
+                break;
+            }
+            case "update": {
                 tel.setId(NSR);
                 telDAO.updateTel(tel);
+                break;
+            }
         }
         this.refresh();
+        initComponents();
+        
     }
     
     public FormTel() {
